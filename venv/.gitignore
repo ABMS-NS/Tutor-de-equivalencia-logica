@@ -1,10 +1,14 @@
 # Ambiente virtual
 venv/
 .env/
+.env.*
+*.env
 
 # Arquivos Python compilados
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 
 # Configurações do VS Code
 .vscode/
@@ -15,6 +19,34 @@ Thumbs.db
 
 # Logs e dados temporários
 *.log
+*.tmp
+*.bak
 
 # Arquivos de cache
 *.cache
+.cache/
+.cache/*
+
+# Arquivos de modelos do spaCy
+*.model
+*.whl
+
+# Arquivos de testes e relatórios
+htmlcov/
+.coverage
+.tox/
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Arquivos de notebooks temporários
+.ipynb_checkpoints/
+
+# Arquivos de sistema do Windows
+ehthumbs.db
+Desktop.ini
