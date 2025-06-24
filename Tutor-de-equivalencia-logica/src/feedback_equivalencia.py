@@ -25,9 +25,9 @@ def analisar_equivalencia(expr1_str, expr2_str):
     print("\n--- Etapa 3: Verificando equivalência lógica ---")
     equivalente, contraexemplo = verificar_equivalencia(expr1, expr2)
     if equivalente:
-        print("As expressões são logicamente equivalentes.")
+        print("✔️ As expressões são logicamente equivalentes.")
     else:
-        print("As expressões NÃO são logicamente equivalentes.")
+        print("❌ As expressões NÃO são logicamente equivalentes.")
         print("\n--- Etapa 4: Mostrando diferença (se houver) ---")
         if contraexemplo is False:
             print("Não há modelo onde as expressões sejam diferentes.")

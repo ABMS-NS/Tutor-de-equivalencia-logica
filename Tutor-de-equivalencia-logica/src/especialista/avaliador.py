@@ -1,9 +1,55 @@
-"""
-Módulo avaliador: compara a solução do estudante com o gabarito.
-"""
+from src.utils import verificar_equivalencia, formatar_expressao
+from src.especialista.parser import parser_expr
+from src.especialista.regras import RegrasLogicas
+from src.especialista.resolvedor import aplicar_regra_recursiva 
 
-class Avaliador:
-    @staticmethod
-    def avaliar(expr_estudante, expr_gabarito):
-        """Retorna True se as expressões forem logicamente equivalentes."""
-        pass
+regras = RegrasLogicas()
+
+def processar_entrada_usuario(texto):
+    texto = texto.replace(' ', '') 
+    try:
+        expr = parser_expr(texto)
+        return expr, None
+    except Exception as e:
+        return None, f"Erro ao processar a expressão: {e}"
+
+def avaliar_resposta_final(resposta_aluno, resposta_correta):
+    expr_aluno, erro1 = processar_entrada_usuario(resposta_aluno)
+    expr_correta, erro2 = processar_entrada_usuario(resposta_correta)
+    if erro1 or erro2:
+        return False, "Erro ao processar a expressão."
+    equivalente, _ = verificar_equivalencia(expr_aluno, expr_correta)
+    return equivalente, None if equivalente else "Expressão não equivalente."
+
+def identificar_regra_aplicada(expr_antes, expr_depois):
+    regras_aplicadas = []
+    for rotulo, func in regras.regras:
+        resultado = aplicar_regra_recursiva(expr_antes, func)
+        if resultado == expr_depois:
+            regras_aplicadas.append(rotulo)
+        else:
+            # Testa a aplicação reversa da regra
+            resultado_reverso = aplicar_regra_recursiva(expr_depois, func)
+            if resultado_reverso == expr_antes:
+                regras_aplicadas.append(rotulo + " (inversa)")
+    return regras_aplicadas
+def avaliar_passos(lista_passos):
+    """
+    lista_passos: [expr1, expr2, expr3, ...] (strings)
+    Retorna True se todos os passos são válidos, senão retorna o erro e o passo.
+    Também identifica automaticamente a(s) regra(s) aplicada(s) em cada passo.
+    """
+    exprs = []
+    for texto in lista_passos:
+        expr, erro = processar_entrada_usuario(texto)
+        if erro:
+            return False, f"Erro ao processar: {erro}", None
+        exprs.append(expr)
+    for i in range(len(exprs) - 1):
+        expr_atual = exprs[i]
+        expr_prox = exprs[i+1]
+        regras_encontradas = identificar_regra_aplicada(expr_atual, expr_prox)
+        if not regras_encontradas:
+            return False, f"Transformação inválida do passo {i+1} para o {i+2}", None
+        print(f"Passo {i+1} → {i+2}: {formatar_expressao(expr_atual)} → {formatar_expressao(expr_prox)} | Regra(s): {', '.join(regras_encontradas)}")
+    return True, None, None

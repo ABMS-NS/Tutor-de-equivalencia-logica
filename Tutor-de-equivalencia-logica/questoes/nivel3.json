@@ -1,3 +1,21 @@
 [
-    {"id": 1, "enunciado": "Exemplo de questão difícil 1", "gabarito": "A"}
+    {
+        "id": 1,
+        "enunciado": "Verifique se as duas sentenças seguintes (S1 e S2) são equivalentes:\nS1: Se chove ou neva, então o chão fica molhado.\nS2: Se o chão está seco, então não choveu e não nevou.",
+        "gabarito_traducao_s1": "(p ∨ q) → r",
+        "gabarito_traducao_s2": "¬r → (¬p ∧ ¬q)",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "p": "chove",
+            "q": "neva",
+            "r": "o chão fica molhado"
+        },
+        "exemplo_caminho": [
+            "((p ∨ q) → r)                            (Expressão inicial)",
+            "(¬r → ¬(p ∨ q))                          (Regra 2 (Contraposição))",
+            "(¬r → (¬p ∧ ¬q))                         (Regra 8 (De Morgan para Disjunção))"
+        ],
+        "dica1": "Analise a estrutura lógica das sentenças: identifique corretamente os conectivos ('ou', 'e', 'não', 'se...então') e lembre-se de que a contrapositiva pode ser útil para mostrar equivalência entre implicações.",
+        "dica2": "Oposto de 'molhado' é 'seco', então use a negação."
+    }
 ]
