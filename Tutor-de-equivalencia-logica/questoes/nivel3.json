@@ -17,5 +17,38 @@
         ],
         "dica1": "Analise a estrutura lógica das sentenças: identifique corretamente os conectivos ('ou', 'e', 'não', 'se...então') e lembre-se de que a contrapositiva pode ser útil para mostrar equivalência entre implicações.",
         "dica2": "Oposto de 'molhado' é 'seco', então use a negação."
-    }
-]
+    },
+    {
+        "id": 2,
+        "enunciado": "Verifique se as duas sentenças seguintes (S1 e S2) são equivalentes:\nS1: A inflação não baixa ou a taxa de juros aumenta.\nS2: Se a inflação baixa, então a taxa de juros aumenta.",
+        "gabarito_traducao_s1": "¬p ∨ q",
+        "gabarito_traducao_s2": "p → q",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "p": "a inflação baixa",
+            "q": "a taxa de juros aumenta"
+        },
+        "exemplo_caminho": [
+            "(¬p ∨ q)                                 (Expressão inicial)",
+            "(p → q)                                  (Regra 1 (Condicional ↔ Disjunção))"
+        ],
+        "dica1": "Lembre-se que 'ou' pode ser representado por disjunção lógica e 'não baixa' é a negação de 'baixa'.",
+        "dica2": "A implicação 'Se p então q' é logicamente equivalente a 'não p ou q'."
+    },
+    {
+        "id": 3,
+        "enunciado": "Verifique se as duas sentenças seguintes (S1 e S2) são equivalentes:\nS1: Um número inteiro é par se e somente se o seu quadrado for par.\nS2: Se um número inteiro for par, então o seu quadrado é par, e se um número inteiro não for par, então o seu quadrado não é par.",
+        "gabarito_traducao_s1": "p ↔ q",
+        "gabarito_traducao_s2": "(p → q) ∧ (¬p → ¬q)",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "p": "um número inteiro é par",
+            "q": "seu quadrado é par"
+        },
+        "exemplo_caminho": [
+            "(p ↔ q)                                  (Expressão inicial)",
+            "((p → q) ∧ (q → p))                      (Regra 3 (Bicondicional ↔ Conjunção de Condicionais))",
+            "((p → q) ∧ (¬p → ¬q))                    (Regra 2 (Contraposição))"
+        ],
+        "dica1": "Lembre-se que 'se e somente se' é um bicondicional.",
+        "dica2": "A contrapositiva de 'q → p' é '¬p → ¬q', que pode ser útil para mostrar equivalência."
