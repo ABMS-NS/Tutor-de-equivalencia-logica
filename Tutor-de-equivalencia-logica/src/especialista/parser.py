@@ -14,11 +14,15 @@ grammar = r"""
         | xor "⊻" or_   -> xor
         | xor "^" or_   -> xor
     ?or_: and_
-         | or_ "∨" and_   -> or_
-         | or_ "|" and_   -> or_
+         | or_list
+
+    or_list: and_ (("∨" and_) | ("|" and_))+   -> or_list
+
     ?and_: not_
-         | and_ "∧" not_  -> and_
-         | and_ "&" not_  -> and_
+         | and_list
+
+    and_list: not_ (("∧" not_) | ("&" not_))+  -> and_list
+
     ?not_: atom
          | "¬" not_      -> not_
          | "~" not_      -> not_
@@ -38,7 +42,11 @@ class ASTTransformer(Transformer):
         return Not(args[0])
     def and_(self, args):
         return And(*args)
+    def and_list(self, args):
+        return And(*args)
     def or_(self, args):
+        return Or(*args)
+    def or_list(self, args):
         return Or(*args)
     def implies(self, args):
         return Implies(args[0], args[1])
