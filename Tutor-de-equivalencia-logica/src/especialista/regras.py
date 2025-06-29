@@ -38,12 +38,14 @@ class RegrasLogicas:
         """exp: p → q ≡ ¬p ∨ q (Condicional ↔ Disjunção)"""
         if isinstance(exp, Implies):
             return Or(Not(exp.a), exp.b)
-        if isinstance(exp, Or) and len(exp.args) == 2:
-            a, b = exp.args
-            if isinstance(a, Not):
-                return Implies(a.arg, b)
-            if isinstance(b, Not):
-                return Implies(b.arg, a)
+        
+        if isinstance(exp, Or):
+            nots = [arg.arg for arg in exp.args if isinstance(arg, Not)]
+            others = [arg for arg in exp.args if not isinstance(arg, Not)]
+            
+            if len(nots) == 1 and others:
+                consequent = Or(*others) if len(others) > 1 else others[0]
+                return Implies(nots[0], consequent)
         return exp
 
     def regra_2(self, exp):
@@ -68,7 +70,7 @@ class RegrasLogicas:
         return exp
 
     def regra_4(self, exp):
-        """exp: p ↔ q ≡ (p ∧ q) ∨ (¬p ∧ ¬q) (Bicondicional ↔ Disjunção de Conjunções)"""
+        """exp: p ↔ q ≡ (p ∧ q) ∨ (¬p ∧ ¬q)"""
         if isinstance(exp, Equivalent):
             return Or(And(exp.a, exp.b), And(Not(exp.a), Not(exp.b)))
         if (isinstance(exp, Or) and len(exp.args) == 2 and
@@ -76,12 +78,13 @@ class RegrasLogicas:
             conjunto_a, conjunto_b = exp.args
             if isinstance(conjunto_a.args[0], Not):
                 conjunto_a, conjunto_b = conjunto_b, conjunto_a
-            
             if len(conjunto_a.args) == 2 and len(conjunto_b.args) == 2:
                 p1, q1 = conjunto_a.args
                 p2, q2 = conjunto_b.args
                 if isinstance(p2, Not) and isinstance(q2, Not):
-                    if {p1, q1} == {p2.arg, q2.arg}:
+                    sorted_pq1 = sorted([str(p1), str(q1)])
+                    sorted_pq2 = sorted([str(p2.arg), str(q2.arg)])
+                    if sorted_pq1 == sorted_pq2:
                         return Equivalent(p1, q1)
         return exp
 
@@ -120,9 +123,10 @@ class RegrasLogicas:
         if isinstance(exp, And) and len(exp.args) > 1:
             argumentos_ordenados = sorted(exp.args, key=str)
             if list(exp.args) != argumentos_ordenados:
-                 return And(*argumentos_ordenados)
+                return And(*argumentos_ordenados)
         return exp
 
+   
     def regra_10(self, exp):
         """exp: p ∨ q ∨ ... ≡ q ∨ p ∨ ... (Comutatividade da Disjunção)"""
         if isinstance(exp, Or) and len(exp.args) > 1:
@@ -131,11 +135,13 @@ class RegrasLogicas:
                 return Or(*argumentos_ordenados)
         return exp
 
+   
     def regra_11(self, exp):
         """exp: p ↔ q ≡ q ↔ p (Comutatividade da Bicondicional)"""
         if isinstance(exp, Equivalent):
             a, b = exp.a, exp.b
-            if str(a) > str(b):
+            if str(a) != str(b): 
+               
                 return Equivalent(b, a)
         return exp
 
@@ -175,78 +181,90 @@ class RegrasLogicas:
 
     def regra_15(self, exp):
         """exp: p ∧ (q ∨ r) ≡ (p ∧ q) ∨ (p ∧ r) (Distributividade da Conjunção sobre Disjunção)"""
+        
         if isinstance(exp, Or) and len(exp.args) > 1 and all(isinstance(t, And) for t in exp.args):
-            conjuntos_dos_termos = [set(arg.args) for arg in exp.args]
-            fatores_comuns = set.intersection(*conjuntos_dos_termos)
+           
+            listas_dos_termos = [sorted(arg.args, key=str) for arg in exp.args]
+            
+           
+            fatores_comuns = listas_dos_termos[0][:]
+            for lista in listas_dos_termos[1:]:
+                fatores_comuns = [f for f in fatores_comuns if f in lista]
+            
             if fatores_comuns:
-                lista_fatores_comuns = sorted(list(fatores_comuns), key=str)
                 novos_disjuntos = []
-                for conjunto in conjuntos_dos_termos:
-                    termos_restantes = sorted(list(conjunto - fatores_comuns), key=str)
-                    if not termos_restantes: continue
-                    novos_disjuntos.append(termos_restantes[0] if len(termos_restantes) == 1 else And(*termos_restantes))
+                for lista in listas_dos_termos:
+                    termos_restantes = [t for t in lista if t not in fatores_comuns]
+                    if termos_restantes:
+                        novos_disjuntos.append(termos_restantes[0] if len(termos_restantes) == 1 else And(*termos_restantes))
                 
-                if not novos_disjuntos: return exp
-                
-                conjuntos_finais = lista_fatores_comuns
                 if novos_disjuntos:
+                    conjuntos_finais = fatores_comuns[:]
                     conjuntos_finais.append(novos_disjuntos[0] if len(novos_disjuntos) == 1 else Or(*sorted(novos_disjuntos, key=str)))
+                    return conjuntos_finais[0] if len(conjuntos_finais) == 1 else And(*conjuntos_finais)
                 
-                return conjuntos_finais[0] if len(conjuntos_finais) == 1 else And(*conjuntos_finais)
-
         if isinstance(exp, And):
             termo_or = next((arg for arg in exp.args if isinstance(arg, Or)), None)
             if termo_or:
                 outros_termos = [arg for arg in exp.args if arg is not termo_or]
-                if not outros_termos: return exp
-                novos_disjuntos = [And(*(outros_termos + [termo])) for termo in termo_or.args]
-                return Or(*novos_disjuntos)
+                if outros_termos:
+                    novos_disjuntos = [And(*(outros_termos + [termo])) for termo in termo_or.args]
+                    return Or(*novos_disjuntos)
         return exp
 
     def regra_16(self, exp):
         """exp: p ∨ (q ∧ r) ≡ (p ∨ q) ∧ (p ∨ r) (Distributividade da Disjunção sobre Conjunção)"""
         if isinstance(exp, And) and len(exp.args) > 1 and all(isinstance(t, Or) for t in exp.args):
-            conjuntos_dos_termos = [set(arg.args) for arg in exp.args]
-            fatores_comuns = set.intersection(*conjuntos_dos_termos)
+            listas_dos_termos = [sorted(arg.args, key=str) for arg in exp.args]
+            fatores_comuns = listas_dos_termos[0][:]
+            for lista in listas_dos_termos[1:]:
+                fatores_comuns = [f for f in fatores_comuns if f in lista]
             if fatores_comuns:
-                lista_fatores_comuns = sorted(list(fatores_comuns), key=str)
                 novos_conjuntos = []
-                for conjunto in conjuntos_dos_termos:
-                    termos_restantes = sorted(list(conjunto - fatores_comuns), key=str)
-                    if not termos_restantes: continue
-                    novos_conjuntos.append(termos_restantes[0] if len(termos_restantes) == 1 else Or(*termos_restantes))
-
-                if not novos_conjuntos: return exp
-
-                disjuntos_finais = lista_fatores_comuns
+                for lista in listas_dos_termos:
+                    termos_restantes = [t for t in lista if t not in fatores_comuns]
+                    if termos_restantes:
+                        novos_conjuntos.append(termos_restantes[0] if len(termos_restantes) == 1 else Or(*termos_restantes))
                 if novos_conjuntos:
-                    disjuntos_finais.append(novos_conjuntos[0] if len(novos_conjuntos) == 1 else And(*sorted(novos_conjuntos, key=str)))
-
-                return disjuntos_finais[0] if len(disjuntos_finais) == 1 else Or(*disjuntos_finais)
+                    conjuntos_finais = fatores_comuns[:]
+                    conjuntos_finais.append(novos_conjuntos[0] if len(novos_conjuntos) == 1 else And(*sorted(novos_conjuntos, key=str)))
+                    return conjuntos_finais[0] if len(conjuntos_finais) == 1 else Or(*conjuntos_finais)
 
         if isinstance(exp, Or):
             termo_and = next((arg for arg in exp.args if isinstance(arg, And)), None)
             if termo_and:
                 outros_termos = [arg for arg in exp.args if arg is not termo_and]
-                if not outros_termos: return exp
-                novos_conjuntos = [Or(*(outros_termos + [termo])) for termo in termo_and.args]
-                return And(*novos_conjuntos)
+                if outros_termos:
+                    novos_conjuntos = [Or(*(outros_termos + [termo])) for termo in termo_and.args]
+                    return And(*novos_conjuntos)
         return exp
 
     def regra_17(self, exp):
         """exp: p ∧ p ∧ q ≡ p ∧ q (Idempotência da Conjunção)"""
-        if isinstance(exp, And) and len(exp.args) > 1:
-            argumentos_unicos = sorted(list(set(exp.args)), key=str)
-            if len(argumentos_unicos) < len(exp.args):
-                return argumentos_unicos[0] if len(argumentos_unicos) == 1 else And(*argumentos_unicos)
+        if isinstance(exp, And):
+            args_unicos = []
+            for arg in exp.args:
+                if arg not in args_unicos:
+                    args_unicos.append(arg)
+            
+            if len(args_unicos) < len(exp.args):
+                if len(args_unicos) == 1:
+                    return args_unicos[0]
+                return And(*args_unicos)
         return exp
 
     def regra_18(self, exp):
         """exp: p ∨ p ∨ q ≡ p ∨ q (Idempotência da Disjunção)"""
-        if isinstance(exp, Or) and len(exp.args) > 1:
-            argumentos_unicos = sorted(list(set(exp.args)), key=str)
-            if len(argumentos_unicos) < len(exp.args):
-                return argumentos_unicos[0] if len(argumentos_unicos) == 1 else Or(*argumentos_unicos)
+        if isinstance(exp, Or):
+            args_unicos = []
+            for arg in exp.args:
+                if arg not in args_unicos:
+                    args_unicos.append(arg)
+            
+            if len(args_unicos) < len(exp.args):
+                if len(args_unicos) == 1:
+                    return args_unicos[0]
+                return Or(*args_unicos)
         return exp
 
     def regra_19(self, exp):
@@ -282,60 +300,86 @@ class RegrasLogicas:
     def regra_23(self, exp):
         """exp: p ∧ ¬p ∧ q ≡ F (Contradição)"""
         if isinstance(exp, And):
-            conjunto_de_argumentos = set(exp.args)
-            for arg in conjunto_de_argumentos:
-                if Not(arg) in conjunto_de_argumentos:
+            visto = set()
+            for arg in exp.args:
+                if isinstance(arg, Not):
+                    key = (arg.arg, 'neg')
+                    comp = (arg.arg, 'pos')
+                else:
+                    key = (arg, 'pos')
+                    comp = (arg, 'neg')
+                
+                if comp in visto:
                     return F()
+                visto.add(key)
         return exp
 
     def regra_24(self, exp):
         """exp: p ∨ ¬p ∨ q ≡ V (Tautologia)"""
         if isinstance(exp, Or):
-            conjunto_de_argumentos = set(exp.args)
-            for arg in conjunto_de_argumentos:
-                if Not(arg) in conjunto_de_argumentos:
+            visto = set()
+            for arg in exp.args:
+                if isinstance(arg, Not):
+                    key = (arg.arg, 'neg')
+                    comp = (arg.arg, 'pos')
+                else:
+                    key = (arg, 'pos')
+                    comp = (arg, 'neg')
+                
+                if comp in visto:
                     return V()
+                visto.add(key)
         return exp
 
     def regra_25(self, exp):
         """exp: p ∧ (p ∨ q) ∧ r ≡ p ∧ r (Absorção da Conjunção)"""
-        if not isinstance(exp, And): return exp
-        termos_absorventes = {arg for arg in exp.args if not isinstance(arg, Or)}
-        if not termos_absorventes: return exp
+        if not isinstance(exp, And): 
+            return exp
         
-        disjuntos_nao_absorvidos = []
+        termos_absorventes = [arg for arg in exp.args if not isinstance(arg, Or)]
+        if not termos_absorventes: 
+            return exp
+        
+        argumentos_finais = termos_absorventes[:]
         houve_mudanca = False
+        
         for arg in exp.args:
             if isinstance(arg, Or):
-                if not termos_absorventes.intersection(arg.args):
-                    disjuntos_nao_absorvidos.append(arg)
+                tem_intersecao = any(termo in arg.args for termo in termos_absorventes)
+                if not tem_intersecao:
+                    argumentos_finais.append(arg)
                 else:
                     houve_mudanca = True
-            
+        
         if houve_mudanca:
-            argumentos_finais = list(termos_absorventes) + disjuntos_nao_absorvidos
-            if len(argumentos_finais) == 1: return argumentos_finais[0]
+            if len(argumentos_finais) == 1: 
+                return argumentos_finais[0]
             return And(*argumentos_finais)
         return exp
 
     def regra_26(self, exp):
         """exp: p ∨ (p ∧ q) ∨ r ≡ p ∨ r (Absorção da Disjunção)"""
-        if not isinstance(exp, Or): return exp
-        termos_absorventes = {arg for arg in exp.args if not isinstance(arg, And)}
-        if not termos_absorventes: return exp
+        if not isinstance(exp, Or): 
+            return exp
+        
+        termos_absorventes = [arg for arg in exp.args if not isinstance(arg, And)]
+        if not termos_absorventes: 
+            return exp
 
-        conjuntos_nao_absorvidos = []
+        argumentos_finais = termos_absorventes[:]
         houve_mudanca = False
+        
         for arg in exp.args:
             if isinstance(arg, And):
-                if not termos_absorventes.intersection(arg.args):
-                    conjuntos_nao_absorvidos.append(arg)
+                tem_intersecao = any(termo in arg.args for termo in termos_absorventes)
+                if not tem_intersecao:
+                    argumentos_finais.append(arg)
                 else:
                     houve_mudanca = True
         
         if houve_mudanca:
-            argumentos_finais = list(termos_absorventes) + conjuntos_nao_absorvidos
-            if len(argumentos_finais) == 1: return argumentos_finais[0]
+            if len(argumentos_finais) == 1: 
+                return argumentos_finais[0]
             return Or(*argumentos_finais)
         return exp
 
@@ -349,9 +393,11 @@ class RegrasLogicas:
             isinstance(exp.args[1].arg, And) and len(exp.args[1].arg.args) == 2):
             expressao_or = exp.args[0]
             expressao_and = exp.args[1].arg
-            if set(expressao_or.args) == set(expressao_and.args):
-                a, b = expressao_or.args
-                return Xor(a, b)
+            or_sorted = sorted([str(arg) for arg in expressao_or.args])
+            and_sorted = sorted([str(arg) for arg in expressao_and.args])
+            if or_sorted == and_sorted:
+                 a, b = expressao_or.args
+                 return Xor(a, b)
         return exp
 
     def regra_28(self, exp):

@@ -1,6 +1,7 @@
 [
     {
         "id": 1,
+        "tipo": "traducao",
         "enunciado": "Verifique se as duas sentenças seguintes (S1 e S2) são equivalentes:\nS1: Se chove ou neva, então o chão fica molhado.\nS2: Se o chão está seco, então não choveu e não nevou.",
         "gabarito_traducao_s1": "(p ∨ q) → r",
         "gabarito_traducao_s2": "¬r → (¬p ∧ ¬q)",
@@ -15,11 +16,13 @@
             "(¬r → ¬(p ∨ q))                          (Regra 2 (Contraposição))",
             "(¬r → (¬p ∧ ¬q))                         (Regra 8 (De Morgan para Disjunção))"
         ],
+        "conceitos": ["traducao", "contraposicao", "de_morgan", "implicacao"],
         "dica1": "Analise a estrutura lógica das sentenças: identifique corretamente os conectivos ('ou', 'e', 'não', 'se...então') e lembre-se de que a contrapositiva pode ser útil para mostrar equivalência entre implicações.",
         "dica2": "Oposto de 'molhado' é 'seco', então use a negação."
     },
     {
         "id": 2,
+        "tipo": "traducao",
         "enunciado": "Verifique se as duas sentenças seguintes (S1 e S2) são equivalentes:\nS1: A inflação não baixa ou a taxa de juros aumenta.\nS2: Se a inflação baixa, então a taxa de juros aumenta.",
         "gabarito_traducao_s1": "¬p ∨ q",
         "gabarito_traducao_s2": "p → q",
@@ -32,11 +35,13 @@
             "(¬p ∨ q)                                 (Expressão inicial)",
             "(p → q)                                  (Regra 1 (Condicional ↔ Disjunção))"
         ],
+        "conceitos": ["traducao", "condicional_disjuncao", "equivalencia_basica"],
         "dica1": "Lembre-se que 'ou' pode ser representado por disjunção lógica e 'não baixa' é a negação de 'baixa'.",
         "dica2": "A implicação 'Se p então q' é logicamente equivalente a 'não p ou q'."
     },
     {
         "id": 3,
+        "tipo": "traducao",
         "enunciado": "Verifique se as duas sentenças seguintes (S1 e S2) são equivalentes:\nS1: Um número inteiro é par se e somente se o seu quadrado for par.\nS2: Se um número inteiro for par, então o seu quadrado é par, e se um número inteiro não for par, então o seu quadrado não é par.",
         "gabarito_traducao_s1": "p ↔ q",
         "gabarito_traducao_s2": "(p → q) ∧ (¬p → ¬q)",
@@ -50,5 +55,177 @@
             "((p → q) ∧ (q → p))                      (Regra 3 (Bicondicional ↔ Conjunção de Condicionais))",
             "((p → q) ∧ (¬p → ¬q))                    (Regra 2 (Contraposição))"
         ],
+        "conceitos": ["traducao", "bicondicional", "contraposicao", "conjuncao_condicionais"],
         "dica1": "Lembre-se que 'se e somente se' é um bicondicional.",
         "dica2": "A contrapositiva de 'q → p' é '¬p → ¬q', que pode ser útil para mostrar equivalência."
+    },
+    {
+        "id": 4,
+        "tipo": "simbolica",
+        "enunciado": "Verifique se as duas expressões lógicas seguintes (S1 e S2) são equivalentes:\nS1: (((A ∧ ¬B) → C) → (B ∨ C))\nS2: ((A ∧ ¬B ∧ ¬C) ∨ B ∨ C)",
+        "expressao_s1": "(((A ∧ ¬B) → C) → (B ∨ C))",
+        "expressao_s2": "((A ∧ ¬B ∧ ¬C) ∨ B ∨ C)",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "A": "proposição A",
+            "B": "proposição B", 
+            "C": "proposição C"
+        },
+        "exemplo_caminho": [
+            "(((A ∧ ¬B) → C) → (B ∨ C))               (Expressão inicial)",
+            "(¬(B ∨ C) → ¬((A ∧ ¬B) → C))             (Regra 2 (Contraposição))",
+            "(¬¬(B ∨ C) ∨ ¬((A ∧ ¬B) → C))            (Regra 1 (Condicional ↔ Disjunção))",
+            "(¬¬(B ∨ C) ∨ ¬(¬(A ∧ ¬B) ∨ C))           (Regra 1 (Condicional ↔ Disjunção))",
+            "((B ∨ C) ∨ ¬(¬(A ∧ ¬B) ∨ C))             (Regra 6 (Dupla Negação))",
+            "(B ∨ C ∨ ¬(¬(A ∧ ¬B) ∨ C))               (Regra 13 (Associatividade da Disjunção))",
+            "(B ∨ C ∨ (¬¬(A ∧ ¬B) ∧ ¬C))              (Regra 8 (De Morgan para Disjunção))",
+            "(B ∨ C ∨ ((A ∧ ¬B) ∧ ¬C))                (Regra 6 (Dupla Negação))",
+            "(((A ∧ ¬B) ∧ ¬C) ∨ B ∨ C)                (Regra 10 (Comutatividade da Disjunção))",
+            "((A ∧ ¬B ∧ ¬C) ∨ B ∨ C)                  (Regra 12 (Associatividade da Conjunção))"
+        ],
+        "conceitos": ["contraposicao", "condicional_disjuncao", "de_morgan", "dupla_negacao", "associatividade", "comutatividade"],
+        "dica1": "Esta é uma questão complexa que envolve múltiplas transformações. Comece aplicando a contraposição na implicação principal.",
+        "dica2": "Após aplicar contraposição, converta as implicações em disjunções e use De Morgan para simplificar negações compostas."
+    },
+    {
+        "id": 5,
+        "tipo": "simbolica",
+        "enunciado": "Verifique se as duas expressões lógicas seguintes (S1 e S2) são equivalentes:\nS1: (¬(¬(A ∧ ¬B) ∨ C) ∨ (B ∨ C))\nS2: (((A ∧ ¬B) → C) → (B ∨ C))",
+        "expressao_s1": "(¬(¬(A ∧ ¬B) ∨ C) ∨ (B ∨ C))",
+        "expressao_s2": "(((A ∧ ¬B) → C) → (B ∨ C))",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "A": "proposição A",
+            "B": "proposição B",
+            "C": "proposição C"
+        },
+        "exemplo_caminho": [
+            "(¬(¬(A ∧ ¬B) ∨ C) ∨ (B ∨ C))             (Expressão inicial)",
+            "((¬(A ∧ ¬B) ∨ C) → (B ∨ C))              (Regra 1 (Condicional ↔ Disjunção))",
+            "(¬(B ∨ C) → ¬(¬(A ∧ ¬B) ∨ C))            (Regra 2 (Contraposição))",
+            "(¬¬(B ∨ C) ∨ ¬(¬(A ∧ ¬B) ∨ C))           (Regra 1 (Condicional ↔ Disjunção))",
+            "(¬¬(B ∨ C) ∨ ¬((A ∧ ¬B) → C))            (Regra 1 (Condicional ↔ Disjunção))",
+            "((B ∨ C) ∨ ¬((A ∧ ¬B) → C))              (Regra 6 (Dupla Negação))",
+            "(((A ∧ ¬B) → C) → (B ∨ C))               (Regra 1 (Condicional ↔ Disjunção))"
+        ],
+        "conceitos": ["condicional_disjuncao", "contraposicao", "dupla_negacao", "implicacao_aninhada"],
+        "dica1": "A primeira expressão está na forma de disjunção com uma negação complexa. Tente convertê-la para uma implicação.",
+        "dica2": "Use a equivalência entre (¬P ∨ Q) e (P → Q) para simplificar a estrutura."
+    },
+    {
+        "id": 6,
+        "tipo": "simbolica",
+        "enunciado": "Verifique se as duas expressões lógicas seguintes (S1 e S2) são equivalentes:\nS1: ¬((A ∨ B) ∧ (¬C ∨ D))\nS2: (¬A ∧ ¬B) ∨ (C ∧ ¬D)",
+        "expressao_s1": "¬((A ∨ B) ∧ (¬C ∨ D))",
+        "expressao_s2": "(¬A ∧ ¬B) ∨ (C ∧ ¬D)",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "A": "proposição A",
+            "B": "proposição B",
+            "C": "proposição C",
+            "D": "proposição D"
+        },
+        "exemplo_caminho": [
+            "¬((A ∨ B) ∧ (¬C ∨ D))                    (Expressão inicial)",
+            "(¬(A ∨ B) ∨ ¬(¬C ∨ D))                   (Regra 8 (De Morgan para Conjunção))",
+            "((¬A ∧ ¬B) ∨ ¬(¬C ∨ D))                  (Regra 8 (De Morgan para Disjunção))",
+            "((¬A ∧ ¬B) ∨ (¬¬C ∧ ¬D))                 (Regra 8 (De Morgan para Disjunção))",
+            "((¬A ∧ ¬B) ∨ (C ∧ ¬D))                   (Regra 6 (Dupla Negação))"
+        ],
+        "conceitos": ["de_morgan", "dupla_negacao", "negacao_complexa", "conjuncao_disjuncao"],
+        "dica1": "Esta questão envolve aplicação sucessiva da Lei de De Morgan. Comece negando a conjunção externa.",
+        "dica2": "Aplique De Morgan novamente nas disjunções internas que foram negadas."
+    },
+    {
+        "id": 7,
+        "tipo": "traducao",
+        "enunciado": "Verifique se as duas sentenças seguintes (S1 e S2) são equivalentes:\nS1: Se a empresa investe em tecnologia e não demite funcionários, então ela cresce. Se a empresa não cresce, então ela não investe em tecnologia ou demite funcionários.\nS2: A empresa cresce se e somente se ela investe em tecnologia e não demite funcionários.",
+        "gabarito_traducao_s1": "((T ∧ ¬D) → C) ∧ (¬C → (¬T ∨ D))",
+        "gabarito_traducao_s2": "C ↔ (T ∧ ¬D)",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "T": "a empresa investe em tecnologia",
+            "D": "a empresa demite funcionários",
+            "C": "a empresa cresce"
+        },
+        "exemplo_caminho": [
+            "((T ∧ ¬D) → C) ∧ (¬C → (¬T ∨ D))         (Expressão inicial)",
+            "((T ∧ ¬D) → C) ∧ (¬C → ¬(T ∧ ¬D))        (Regra 8 (De Morgan para Conjunção))",
+            "((T ∧ ¬D) → C) ∧ ((T ∧ ¬D) → C)          (Regra 2 (Contraposição))",
+            "((T ∧ ¬D) → C) ∧ (C → (T ∧ ¬D))          (Equivalência por redundância)",
+            "(C ↔ (T ∧ ¬D))                           (Regra 3 (Bicondicional ↔ Conjunção de Condicionais))"
+        ],
+        "conceitos": ["traducao", "contraposicao", "bicondicional", "de_morgan", "redundancia_logica"],
+        "dica1": "Analise cuidadamente as duas partes da primeira sentença. A segunda parte é a contraposição da primeira.",
+        "dica2": "Quando uma implicação e sua contraposição estão presentes, isso indica um bicondicional."
+    },
+    {
+        "id": 8,
+        "tipo": "traducao",
+        "enunciado": "Verifique se as duas sentenças seguintes (S1 e S2) são equivalentes:\nS1: Maria vai à festa ou ao cinema, mas não vai ao cinema.\nS2: Maria vai à festa.",
+        "gabarito_traducao_s1": "(P ∨ H) ∧ ¬H",
+        "gabarito_traducao_s2": "P",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "P": "Maria vai à festa",
+            "H": "Maria vai ao cinema"
+        },
+        "exemplo_caminho": [
+            "((P ∨ H) ∧ ¬H)                           (Expressão inicial)",
+            "((P ∧ ¬H) ∨ (H ∧ ¬H))                    (Regra 15 (Distributividade da Conjunção sobre Disjunção))",
+            "((P ∧ ¬H) ∨ F)                           (Regra 17 (Contradição))",
+            "(P ∧ ¬H)                                 (Regra 19 (Elemento Neutro da Disjunção))",
+            "P                                        (Simplificação lógica)"
+        ],
+        "conceitos": ["traducao", "distributividade", "contradicao", "simplificacao", "elemento_neutro"],
+        "dica1": "Quando alguém vai a um lugar 'ou' outro 'mas não' ao segundo, isso significa que definitivamente vai ao primeiro.",
+        "dica2": "Use a distributividade para separar as possibilidades e identifique contradições."
+    },
+    {
+        "id": 9,
+        "tipo": "simbolica",
+        "enunciado": "Verifique se as duas expressões lógicas seguintes (S1 e S2) são equivalentes:\nS1: ((P ∨ H) ∧ ¬H) → P\nS2: ¬P ∨ H ∨ P",
+        "expressao_s1": "((P ∨ H) ∧ ¬H) → P",
+        "expressao_s2": "¬P ∨ H ∨ P",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "P": "proposição P",
+            "H": "proposição H"
+        },
+        "exemplo_caminho": [
+            "(((P ∨ H) ∧ ¬H) → P)                     (Expressão inicial)",
+            "(¬((P ∨ H) ∧ ¬H) ∨ P)                    (Regra 1 (Condicional ↔ Disjunção))",
+            "(¬(P ∨ H) ∨ ¬¬H ∨ P)                     (Regra 8 (De Morgan para Conjunção))",
+            "(¬(P ∨ H) ∨ H ∨ P)                       (Regra 6 (Dupla Negação))",
+            "((¬P ∧ ¬H) ∨ H ∨ P)                      (Regra 8 (De Morgan para Disjunção))",
+            "(¬P ∨ ¬H ∨ H ∨ P)                        (Regra 15 (Distributividade))",
+            "(¬P ∨ H ∨ P)                             (Regra 18 (Lei do Terceiro Excluído: ¬H ∨ H ≡ V))"
+        ],
+        "conceitos": ["condicional_disjuncao", "de_morgan", "dupla_negacao", "distributividade", "terceiro_excluido"],
+        "dica1": "Comece convertendo a implicação em disjunção e depois aplique De Morgan na negação da conjunção.",
+        "dica2": "Observe que ¬H ∨ H sempre resulta em verdadeiro (lei do terceiro excluído)."
+    },
+    {
+        "id": 10,
+        "tipo": "simbolica",
+        "enunciado": "Verifique se as duas expressões lógicas seguintes (S1 e S2) são equivalentes:\nS1: (p ∨ ¬q) ↔ r\nS2: (¬p ∨ r) ∧ (q ∨ r) ∧ (¬r ∨ p ∨ ¬q)",
+        "expressao_s1": "(p ∨ ¬q) ↔ r",
+        "expressao_s2": "(¬p ∨ r) ∧ (q ∨ r) ∧ (¬r ∨ p ∨ ¬q)",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "p": "proposição p",
+            "q": "proposição q",
+            "r": "proposição r"
+        },
+        "exemplo_caminho": [
+            "((p ∨ ¬q) ↔ r)                           (Expressão inicial)",
+            "(((p ∨ ¬q) → r) ∧ (r → (p ∨ ¬q)))        (Regra 3 (Bicondicional ↔ Conjunção de Condicionais))",
+            "((¬(p ∨ ¬q) ∨ r) ∧ (¬r ∨ (p ∨ ¬q)))      (Regra 1 (Condicional ↔ Disjunção))",
+            "(((¬p ∧ q) ∨ r) ∧ (¬r ∨ p ∨ ¬q))         (Regra 8 (De Morgan para Disjunção))",
+            "((¬p ∨ r) ∧ (q ∨ r) ∧ (¬r ∨ p ∨ ¬q))     (Regra 15 (Distributividade da Disjunção sobre Conjunção))"
+        ],
+        "conceitos": ["bicondicional", "condicional_disjuncao", "de_morgan", "distributividade", "forma_normal_conjuntiva"],
+        "dica1": "Expanda o bicondicional em duas implicações e depois converta cada implicação em disjunção.",
+        "dica2": "Use De Morgan para transformar a negação da disjunção e depois aplique distributividade para obter a forma normal conjuntiva."
+    }
+]

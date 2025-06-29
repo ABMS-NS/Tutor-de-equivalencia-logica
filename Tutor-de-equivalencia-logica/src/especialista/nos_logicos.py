@@ -2,8 +2,7 @@ class Expr:
     """
     Classe base para todas as expressões lógicas.
     """
-    pass
-
+   
 class Symbol(Expr):
     def __init__(self, nome):
         self.nome = nome
@@ -32,29 +31,32 @@ class Not(Expr):
 
 class And(Expr):
     def __init__(self, *args):
-        # Preserva ordem para detectar comutatividade explicitamente
-        self.args = list(args)
+        # Preserva ordem original para aplicação explícita de regras
+        self.args = tuple(args)
+        self._hash = hash(("and", self.args))
 
     def __eq__(self, other):
-        # Igualdade estrita respeitando ordem dos argumentos
+        # Igualdade sintática (preserva ordem)
         return isinstance(other, And) and self.args == other.args
-
+    
     def __hash__(self):
-        return hash(("and", tuple(self.args)))
+        return self._hash
 
     def __repr__(self):
-        # Representação clara com ∧ entre termos
         return "(" + " ∧ ".join(map(str, self.args)) + ")"
 
 class Or(Expr):
     def __init__(self, *args):
-        self.args = list(args)
+        # Preserva ordem original para aplicação explícita de regras
+        self.args = tuple(args)
+        self._hash = hash(("or", self.args))
 
     def __eq__(self, other):
+        # Igualdade sintática (preserva ordem)
         return isinstance(other, Or) and self.args == other.args
 
     def __hash__(self):
-        return hash(("or", tuple(self.args)))
+        return self._hash
 
     def __repr__(self):
         return "(" + " ∨ ".join(map(str, self.args)) + ")"
@@ -63,12 +65,13 @@ class Implies(Expr):
     def __init__(self, a, b):
         self.a = a
         self.b = b
+        self._hash = hash(("implies", a, b))
 
     def __eq__(self, other):
         return isinstance(other, Implies) and self.a == other.a and self.b == other.b
 
     def __hash__(self):
-        return hash(("implies", self.a, self.b))
+        return self._hash
 
     def __repr__(self):
         return f"({self.a} → {self.b})"
@@ -77,37 +80,47 @@ class Equivalent(Expr):
     def __init__(self, a, b):
         self.a = a
         self.b = b
+        self._hash = hash(("equiv", a, b))
 
     def __eq__(self, other):
         return isinstance(other, Equivalent) and self.a == other.a and self.b == other.b
 
     def __hash__(self):
-        return hash(("equiv", self.a, self.b))
+        return self._hash
 
     def __repr__(self):
         return f"({self.a} ↔ {self.b})"
 
 class Xor(Expr):
     def __init__(self, a, b):
+        # Preserva ordem original para aplicação explícita de regras
         self.a = a
         self.b = b
+        self._hash = hash(("xor", a, b))
 
     def __eq__(self, other):
-        # Comutativo como XOR lógico
-        return isinstance(other, Xor) and (
-            (self.a == other.a and self.b == other.b) or
-            (self.a == other.b and self.b == other.a)
-        )
+        # Igualdade sintática (preserva ordem)
+        return isinstance(other, Xor) and self.a == other.a and self.b == other.b
+
 
     def __hash__(self):
-        return hash(("xor", frozenset([self.a, self.b])))
+        return self._hash
 
     def __repr__(self):
         return f"({self.a} ⊻ {self.b})"
 
 class V(Expr):
+    _instance = None
+    # Singleton para representar a constante lógica V (verdade)
+    # Evita criação de instâncias várias vezes
+    def __new__(cls): 
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+        
     def __eq__(self, other):
         return isinstance(other, V)
+
 
     def __hash__(self):
         return hash("V")
@@ -116,6 +129,13 @@ class V(Expr):
         return "V"
 
 class F(Expr):
+    _instance = None
+    
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+        
     def __eq__(self, other):
         return isinstance(other, F)
 

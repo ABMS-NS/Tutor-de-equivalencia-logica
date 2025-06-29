@@ -1,4 +1,193 @@
 [
-    {"id": 1, "enunciado": "Exemplo de questão fácil 1", "gabarito": "A"},
-    {"id": 2, "enunciado": "Exemplo de questão fácil 2", "gabarito": "B"}
+    {
+        "id": 1,
+        "tipo": "simbolica",
+        "enunciado": "Determine se as duas expressões (A e B) são logicamente equivalentes:\nA: ¬¬p\nB: p",
+        "expressao_s1": "¬¬p",
+        "expressao_s2": "p",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "p": "proposição p"
+        },
+        "exemplo_caminho": [
+            "¬¬p                                      (Expressão inicial)",
+            "p                                        (Regra 6 (Dupla Negação))"
+        ],
+        "conceitos": ["dupla_negacao", "simplificacao_basica"],
+        "dica1": "A dupla negação cancela-se mutuamente.",
+        "dica2": "¬¬p é sempre equivalente a p."
+    },
+    {
+        "id": 2,
+        "tipo": "simbolica",
+        "enunciado": "Analise se as expressões (X e Y) representam a mesma relação lógica:\nX: p ∧ q\nY: q ∧ p",
+        "expressao_s1": "p ∧ q",
+        "expressao_s2": "q ∧ p",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "p": "proposição p",
+            "q": "proposição q"
+        },
+        "exemplo_caminho": [
+            "(p ∧ q)                                  (Expressão inicial)",
+            "(q ∧ p)                                  (Regra 9 (Comutatividade da Conjunção))"
+        ],
+        "conceitos": ["comutatividade", "conjuncao"],
+        "dica1": "A ordem dos elementos em uma conjunção não altera o resultado.",
+        "dica2": "A conjunção é comutativa: p ∧ q ≡ q ∧ p."
+    },
+    {
+        "id": 3,
+        "tipo": "simbolica",
+        "enunciado": "Verifique se as fórmulas (S1 e S2) são equivalentes:\nS1: p ∨ q\nS2: q ∨ p",
+        "expressao_s1": "p ∨ q",
+        "expressao_s2": "q ∨ p",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "p": "proposição p",
+            "q": "proposição q"
+        },
+        "exemplo_caminho": [
+            "(p ∨ q)                                  (Expressão inicial)",
+            "(q ∨ p)                                  (Regra 10 (Comutatividade da Disjunção))"
+        ],
+        "conceitos": ["comutatividade", "disjuncao"],
+        "dica1": "A ordem dos elementos em uma disjunção não altera o resultado.",
+        "dica2": "A disjunção é comutativa: p ∨ q ≡ q ∨ p."
+    },
+    {
+        "id": 4,
+        "tipo": "simbolica",
+        "enunciado": "Compare as estruturas lógicas (Expr_α e Expr_β):\nExpr_α: ¬(p ∧ q)\nExpr_β: ¬p ∨ ¬q",
+        "expressao_s1": "¬(p ∧ q)",
+        "expressao_s2": "¬p ∨ ¬q",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "p": "proposição p",
+            "q": "proposição q"
+        },
+        "exemplo_caminho": [
+            "¬(p ∧ q)                                 (Expressão inicial)",
+            "(¬p ∨ ¬q)                                (Regra 7 (De Morgan para Conjunção))"
+        ],
+        "conceitos": ["de_morgan", "negacao_conjuncao"],
+        "dica1": "A negação de uma conjunção torna-se uma disjunção de negações.",
+        "dica2": "Lei de De Morgan: ¬(p ∧ q) ≡ ¬p ∨ ¬q."
+    },
+    {
+        "id": 5,
+        "tipo": "simbolica",
+        "enunciado": "Examine se as proposições (Form1 e Form2) são logicamente idênticas:\nForm1: ¬(p ∨ q)\nForm2: ¬p ∧ ¬q",
+        "expressao_s1": "¬(p ∨ q)",
+        "expressao_s2": "¬p ∧ ¬q",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "p": "proposição p",
+            "q": "proposição q"
+        },
+        "exemplo_caminho": [
+            "¬(p ∨ q)                                 (Expressão inicial)",
+            "(¬p ∧ ¬q)                                (Regra 8 (De Morgan para Disjunção))"
+        ],
+        "conceitos": ["de_morgan", "negacao_disjuncao"],
+        "dica1": "A negação de uma disjunção torna-se uma conjunção de negações.",
+        "dica2": "Lei de De Morgan: ¬(p ∨ q) ≡ ¬p ∧ ¬q."
+    },
+    {
+        "id": 6,
+        "tipo": "simbolica",
+        "enunciado": "Investigue se as sentenças (Sent_I e Sent_II) são equivalentes:\nSent_I: (p ∧ q) ∧ r\nSent_II: p ∧ (q ∧ r)",
+        "expressao_s1": "(p ∧ q) ∧ r",
+        "expressao_s2": "p ∧ (q ∧ r)",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "p": "proposição p",
+            "q": "proposição q",
+            "r": "proposição r"
+        },
+        "exemplo_caminho": [
+            "((p ∧ q) ∧ r)                            (Expressão inicial)",
+            "(p ∧ q ∧ r)                              (Regra 12 (Associatividade da Conjunção))",
+            "(p ∧ (q ∧ r))                            (Regra 12 (Associatividade da Conjunção))"
+        ],
+        "conceitos": ["associatividade", "conjuncao"],
+        "dica1": "O agrupamento de conjunções não altera o resultado final.",
+        "dica2": "A conjunção é associativa: (p ∧ q) ∧ r ≡ p ∧ (q ∧ r)."
+    },
+    {
+        "id": 7,
+        "tipo": "simbolica",
+        "enunciado": "Avalie se as fórmulas lógicas (LogicA e LogicB) expressam a mesma relação:\nLogicA: (p ∨ q) ∨ r\nLogicB: p ∨ (q ∨ r)",
+        "expressao_s1": "(p ∨ q) ∨ r",
+        "expressao_s2": "p ∨ (q ∨ r)",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "p": "proposição p",
+            "q": "proposição q",
+            "r": "proposição r"
+        },
+        "exemplo_caminho": [
+            "((p ∨ q) ∨ r)                            (Expressão inicial)",
+            "(p ∨ q ∨ r)                              (Regra 13 (Associatividade da Disjunção))",
+            "(p ∨ (q ∨ r))                            (Regra 13 (Associatividade da Disjunção))"
+        ],
+        "conceitos": ["associatividade", "disjuncao"],
+        "dica1": "O agrupamento de disjunções não altera o resultado final.",
+        "dica2": "A disjunção é associativa: (p ∨ q) ∨ r ≡ p ∨ (q ∨ r)."
+    },
+    {
+        "id": 8,
+        "tipo": "simbolica",
+        "enunciado": "Determine se as construções (Const_1 e Const_2) são logicamente equivalentes:\nConst_1: p ∧ p\nConst_2: p",
+        "expressao_s1": "p ∧ p",
+        "expressao_s2": "p",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "p": "proposição p"
+        },
+        "exemplo_caminho": [
+            "(p ∧ p)                                  (Expressão inicial)",
+            "p                                        (Regra 17 (Idempotência da Conjunção))"
+        ],
+        "conceitos": ["idempotencia", "conjuncao", "simplificacao"],
+        "dica1": "Uma proposição conjungida consigo mesma é equivalente à própria proposição.",
+        "dica2": "Idempotência da conjunção: p ∧ p ≡ p."
+    },
+    {
+        "id": 9,
+        "tipo": "simbolica",
+        "enunciado": "Analise se as expressões proposicionais (Prop_M e Prop_N) têm o mesmo significado:\nProp_M: p ∨ p\nProp_N: p",
+        "expressao_s1": "p ∨ p",
+        "expressao_s2": "p",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "p": "proposição p"
+        },
+        "exemplo_caminho": [
+            "(p ∨ p)                                  (Expressão inicial)",
+            "p                                        (Regra 18 (Idempotência da Disjunção))"
+        ],
+        "conceitos": ["idempotencia", "disjuncao", "simplificacao"],
+        "dica1": "Uma proposição disjungida consigo mesma é equivalente à própria proposição.",
+        "dica2": "Idempotência da disjunção: p ∨ p ≡ p."
+    },
+    {
+        "id": 10,
+        "tipo": "simbolica",
+        "enunciado": "Verifique se as declarações lógicas (Decl_X e Decl_Y) são logicamente idênticas:\nDecl_X: p ↔ q\nDecl_Y: q ↔ p",
+        "expressao_s1": "p ↔ q",
+        "expressao_s2": "q ↔ p",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "p": "proposição p",
+            "q": "proposição q"
+        },
+        "exemplo_caminho": [
+            "(p ↔ q)                                  (Expressão inicial)",
+            "(q ↔ p)                                  (Regra 11 (Comutatividade da Bicondicional))"
+        ],
+        "conceitos": ["comutatividade", "bicondicional"],
+        "dica1": "A ordem dos elementos em um bicondicional não altera o resultado.",
+        "dica2": "O bicondicional é comutativo: p ↔ q ≡ q ↔ p."
+    }
 ]

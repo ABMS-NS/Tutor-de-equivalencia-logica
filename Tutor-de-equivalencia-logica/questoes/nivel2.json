@@ -1,3 +1,213 @@
 [
-    {"id": 1, "enunciado": "Exemplo de questão intermediária 1", "gabarito": "A"}
+    {
+        "id": 1,
+        "tipo": "simbolica",
+        "enunciado": "Determine se as expressões lógicas abaixo (E1 e E2) são logicamente equivalentes:\nE1: ¬(p → q)\nE2: (p ∧ ¬q)",
+        "expressao_s1": "¬(p → q)",
+        "expressao_s2": "(p ∧ ¬q)",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "p": "proposição p",
+            "q": "proposição q"
+        },
+        "exemplo_caminho": [
+            "¬(p → q)                                 (Expressão inicial)",
+            "¬(¬p ∨ q)                                (Regra 1 (Condicional ↔ Disjunção))",
+            "(¬¬p ∧ ¬q)                               (Regra 8 (De Morgan para Disjunção))",
+            "(p ∧ ¬q)                                 (Regra 6 (Dupla Negação))"
+        ],
+        "conceitos": ["condicional_disjuncao", "de_morgan", "dupla_negacao", "negacao_implicacao"],
+        "dica1": "Para negar uma implicação, primeiro converta-a em disjunção.",
+        "dica2": "Use De Morgan para distribuir a negação sobre a disjunção."
+    },
+    {
+        "id": 2,
+        "tipo": "simbolica",
+        "enunciado": "Analise se as fórmulas proposicionais seguintes (F1 e F2) representam a mesma relação lógica:\nF1: ¬P ∨ Q\nF2: P → Q",
+        "expressao_s1": "¬P ∨ Q",
+        "expressao_s2": "P → Q",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "P": "proposição P",
+            "Q": "proposição Q"
+        },
+        "exemplo_caminho": [
+            "(¬P ∨ Q)                                 (Expressão inicial)",
+            "(P → Q)                                  (Regra 1 (Condicional ↔ Disjunção))"
+        ],
+        "conceitos": ["condicional_disjuncao", "equivalencia_fundamental"],
+        "dica1": "Esta é uma das equivalências mais fundamentais da lógica proposicional.",
+        "dica2": "A implicação 'P → Q' é definida como '¬P ∨ Q'."
+    },
+    {
+        "id": 3,
+        "tipo": "simbolica",
+        "enunciado": "Verifique se as duas expressões lógicas (Expr1 e Expr2) possuem o mesmo valor de verdade:\nExpr1: (P ∧ Q) → R\nExpr2: ¬(P ∧ Q) ∨ R",
+        "expressao_s1": "(P ∧ Q) → R",
+        "expressao_s2": "¬(P ∧ Q) ∨ R",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "P": "proposição P",
+            "Q": "proposição Q",
+            "R": "proposição R"
+        },
+        "exemplo_caminho": [
+            "((P ∧ Q) → R)                            (Expressão inicial)",
+            "(¬(P ∧ Q) ∨ R)                           (Regra 1 (Condicional ↔ Disjunção))"
+        ],
+        "conceitos": ["condicional_disjuncao", "equivalencia_fundamental", "implicacao_conjuncao"],
+        "dica1": "Use a equivalência fundamental entre implicação e disjunção.",
+        "dica2": "A implicação (P ∧ Q) → R é definida como ¬(P ∧ Q) ∨ R."
+    },
+    {
+        "id": 4,
+        "tipo": "simbolica",
+        "enunciado": "Compare as seguintes estruturas lógicas (Estrutura_A e Estrutura_B) para determinar equivalência:\nEstrutura_A: (p → q) ∧ (p → ¬q)\nEstrutura_B: ¬p",
+        "expressao_s1": "(p → q) ∧ (p → ¬q)",
+        "expressao_s2": "¬p",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "p": "proposição p",
+            "q": "proposição q"
+        },
+        "exemplo_caminho": [
+            "((p → q) ∧ (p → ¬q))                     (Expressão inicial)",
+            "((¬p ∨ q) ∧ (¬p ∨ ¬q))                   (Regra 1 (Condicional ↔ Disjunção))",
+            "(¬p ∨ (q ∧ ¬q))                          (Regra 15 (Distributividade da Disjunção sobre Conjunção))",
+            "(¬p ∨ F)                                 (Regra 17 (Contradição: q ∧ ¬q ≡ F))",
+            "¬p                                       (Regra 19 (Elemento Neutro da Disjunção))"
+        ],
+        "conceitos": ["condicional_disjuncao", "distributividade", "contradicao", "elemento_neutro"],
+        "dica1": "Converta ambas as implicações em disjunções e use distributividade.",
+        "dica2": "Observe que 'q ∧ ¬q' é sempre falso (contradição)."
+    },
+    {
+        "id": 5,
+        "tipo": "simbolica",
+        "enunciado": "Examine se as proposições compostas (Prop1 e Prop2) são logicamente idênticas:\nProp1: ¬(A ∧ B) → C\nProp2: (A ∧ B) ∨ C",
+        "expressao_s1": "¬(A ∧ B) → C",
+        "expressao_s2": "(A ∧ B) ∨ C",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "A": "proposição A",
+            "B": "proposição B",
+            "C": "proposição C"
+        },
+        "exemplo_caminho": [
+            "(¬(A ∧ B) → C)                           (Expressão inicial)",
+            "(¬¬(A ∧ B) ∨ C)                          (Regra 1 (Condicional ↔ Disjunção))",
+            "((A ∧ B) ∨ C)                            (Regra 6 (Dupla Negação))"
+        ],
+        "conceitos": ["condicional_disjuncao", "dupla_negacao", "negacao_conjuncao"],
+        "dica1": "Converta a implicação em disjunção usando a regra fundamental.",
+        "dica2": "Simplifique a dupla negação para obter o resultado final."
+    },
+    {
+        "id": 6,
+        "tipo": "simbolica",
+        "enunciado": "Investigue se as seguintes sentenças lógicas (Sentença_X e Sentença_Y) são equivalentes:\nSentença_X: (p ∨ q) → r\nSentença_Y: (p → r) ∧ (q → r)",
+        "expressao_s1": "(p ∨ q) → r",
+        "expressao_s2": "(p → r) ∧ (q → r)",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "p": "proposição p",
+            "q": "proposição q",
+            "r": "proposição r"
+        },
+        "exemplo_caminho": [
+            "((p ∨ q) → r)                            (Expressão inicial)",
+            "(¬(p ∨ q) ∨ r)                           (Regra 1 (Condicional ↔ Disjunção))",
+            "((¬p ∧ ¬q) ∨ r)                          (Regra 8 (De Morgan para Disjunção))",
+            "((¬p ∨ r) ∧ (¬q ∨ r))                    (Regra 15 (Distributividade da Disjunção sobre Conjunção))",
+            "((p → r) ∧ (q → r))                      (Regra 1 (Condicional ↔ Disjunção))"
+        ],
+        "conceitos": ["condicional_disjuncao", "de_morgan", "distributividade", "decomposicao_implicacao"],
+        "dica1": "Use De Morgan para transformar a negação da disjunção em conjunção de negações.",
+        "dica2": "Aplique distributividade para separar as implicações."
+    },
+    {
+        "id": 7,
+        "tipo": "simbolica",
+        "enunciado": "Avalie se as duas fórmulas lógicas (Formula_I e Formula_II) expressam a mesma relação:\nFormula_I: ¬(P → Q)\nFormula_II: P ∧ ¬Q",
+        "expressao_s1": "¬(P → Q)",
+        "expressao_s2": "P ∧ ¬Q",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "P": "proposição P",
+            "Q": "proposição Q"
+        },
+        "exemplo_caminho": [
+            "¬(P → Q)                                 (Expressão inicial)",
+            "¬(¬P ∨ Q)                                (Regra 1 (Condicional ↔ Disjunção))",
+            "(¬¬P ∧ ¬Q)                               (Regra 8 (De Morgan para Disjunção))",
+            "(P ∧ ¬Q)                                 (Regra 6 (Dupla Negação))"
+        ],
+        "conceitos": ["condicional_disjuncao", "de_morgan", "dupla_negacao", "negacao_implicacao"],
+        "dica1": "Esta é a forma padrão de negar uma implicação.",
+        "dica2": "¬(P → Q) sempre equivale a P ∧ ¬Q."
+    },
+    {
+        "id": 8,
+        "tipo": "simbolica",
+        "enunciado": "Determine se as construções lógicas (Construção_α e Construção_β) são logicamente equivalentes:\nConstrução_α: (A → B) ∧ (¬A → B)\nConstrução_β: B",
+        "expressao_s1": "(A → B) ∧ (¬A → B)",
+        "expressao_s2": "B",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "A": "proposição A",
+            "B": "proposição B"
+        },
+        "exemplo_caminho": [
+            "((A → B) ∧ (¬A → B))                     (Expressão inicial)",
+            "((¬A ∨ B) ∧ (¬¬A ∨ B))                   (Regra 1 (Condicional ↔ Disjunção))",
+            "((¬A ∨ B) ∧ (A ∨ B))                     (Regra 6 (Dupla Negação))",
+            "((¬A ∧ A) ∨ B)                           (Regra 15 (Distributividade da Disjunção sobre Conjunção))",
+            "(F ∨ B)                                  (Regra 17 (Contradição: ¬A ∧ A ≡ F))",
+            "B                                        (Regra 19 (Elemento Neutro da Disjunção))"
+        ],
+        "conceitos": ["condicional_disjuncao", "dupla_negacao", "distributividade", "contradicao", "elemento_neutro"],
+        "dica1": "Converta ambas as implicações em disjunções.",
+        "dica2": "Use distributividade e observe que ¬A ∧ A é sempre falso."
+    },
+    {
+        "id": 9,
+        "tipo": "simbolica",
+        "enunciado": "Analise se as expressões proposicionais (Expr_M e Expr_N) têm o mesmo significado lógico:\nExpr_M: ¬(p ∧ q) ∨ r\nExpr_N: (p ∧ q) → r",
+        "expressao_s1": "¬(p ∧ q) ∨ r",
+        "expressao_s2": "(p ∧ q) → r",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "p": "proposição p",
+            "q": "proposição q",
+            "r": "proposição r"
+        },
+        "exemplo_caminho": [
+            "(¬(p ∧ q) ∨ r)                           (Expressão inicial)",
+            "((p ∧ q) → r)                            (Regra 1 (Condicional ↔ Disjunção))"
+        ],
+        "conceitos": ["condicional_disjuncao", "equivalencia_fundamental"],
+        "dica1": "Esta é outra aplicação direta da equivalência fundamental entre implicação e disjunção.",
+        "dica2": "¬P ∨ Q sempre equivale a P → Q."
+    },
+    {
+        "id": 10,
+        "tipo": "simbolica",
+        "enunciado": "Verifique se as duas declarações lógicas (Declaração_1 e Declaração_2) são logicamente idênticas:\nDeclaração_1: (P ∨ Q) ∧ (P ∨ ¬Q)\nDeclaração_2: P",
+        "expressao_s1": "(P ∨ Q) ∧ (P ∨ ¬Q)",
+        "expressao_s2": "P",
+        "gabarito_equivalencia": true,
+        "legenda": {
+            "P": "proposição P",
+            "Q": "proposição Q"
+        },
+        "exemplo_caminho": [
+            "((P ∨ Q) ∧ (P ∨ ¬Q))                     (Expressão inicial)",
+            "(P ∨ (Q ∧ ¬Q))                           (Regra 15 (Distributividade da Disjunção sobre Conjunção))",
+            "(P ∨ F)                                  (Regra 17 (Contradição: Q ∧ ¬Q ≡ F))",
+            "P                                        (Regra 19 (Elemento Neutro da Disjunção))"
+        ],
+        "conceitos": ["distributividade", "contradicao", "elemento_neutro", "simplificacao"],
+        "dica1": "Use a distributividade da disjunção sobre a conjunção.",
+        "dica2": "Observe que Q ∧ ¬Q é sempre falso, simplificando a expressão."
+    }
 ]

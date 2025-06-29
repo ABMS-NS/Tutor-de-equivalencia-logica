@@ -5,6 +5,44 @@ Utilitários para o sistema de equivalências lógicas.
 from .especialista.nos_logicos import Symbol, Equivalent, Xor, Implies, And, Or, Not, V, F
 from sympy import symbols, simplify_logic, And as sAnd, Or as sOr, Not as sNot, Implies as sImplies, Equivalent as sEquivalent
 
+
+def normalizar_expr(expr):
+    """
+    Converte uma expressão para sua forma canônica, ordenando os argumentos
+    de operadores comutativos. Usa uma abordagem explícita para cada tipo de nó.
+    """
+    # Casos base (átomos não têm filhos para normalizar)
+    if isinstance(expr, (Symbol, V, F)):
+        return expr
+    
+    # Operadores comutativos n-ários (And, Or)
+    if isinstance(expr, (And, Or)):
+        args_norm = [normalizar_expr(arg) for arg in expr.args]
+        # Ordenação superior: agrupa por tipo, depois por string
+        args_sorted = sorted(args_norm, key=lambda x: (str(type(x)), str(x)))
+        return expr.__class__(*args_sorted)
+    
+    # Operadores comutativos binários (Equivalent, Xor)
+    if isinstance(expr, (Equivalent, Xor)):
+        a_norm = normalizar_expr(expr.a)
+        b_norm = normalizar_expr(expr.b)
+        # Usa a mesma chave de ordenação superior para consistência
+        key_a = (str(type(a_norm)), str(a_norm))
+        key_b = (str(type(b_norm)), str(b_norm))
+        if key_a > key_b:
+            a_norm, b_norm = b_norm, a_norm
+        return expr.__class__(a_norm, b_norm)
+    
+    # Operadores não comutativos (apenas recursão)
+    if isinstance(expr, Not):
+        return Not(normalizar_expr(expr.arg))
+    
+    if isinstance(expr, Implies):
+        return Implies(normalizar_expr(expr.a), normalizar_expr(expr.b))
+    
+    # Se a expressão for de um tipo desconhecido, retorna como está.
+    return expr
+
 def formatar_expressao(expr):
     if isinstance(expr, Symbol):
         return expr.nome
