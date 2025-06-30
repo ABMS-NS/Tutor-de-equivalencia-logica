@@ -1,3 +1,2 @@
-"""
-Gerencia criação, login e carregamento do perfil do aluno.
-"""
+class Perfil():
+    def __init__(self, nome, acertos, quantidadeAcertos):

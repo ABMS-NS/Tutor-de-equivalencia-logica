@@ -8,6 +8,8 @@ app = ctk.CTk()
 app.title("Sistema de Aprendizagem")
 app.geometry("900x600")
 
+
+
 MainMenu(app).pack(fill="both", expand=True)
 
 app.mainloop()
