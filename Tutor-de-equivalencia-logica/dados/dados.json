@@ -1,31 +1,3 @@
 {
-  "nome":"",
-  "niveis": {
-    "1": { "dificuldade": 1, "questoes_erradas": [2] },
-    "2": { "dificuldade": 0, "questoes_erradas": [] },
-    "3": { "dificuldade": 4, "questoes_erradas": [1,3,4] },
-    "4": { "dificuldade": 0, "questoes_erradas": [] },
-    "5": { "dificuldade": 0, "questoes_erradas": [] }
-  },
-  "questoesPorNivel":{
-    "facil":{
-      "1":{
-        "titulo":"",
-        "enunciado": "",
-        "resposta": "Sim ou não",
-        "respondidaCorretamente": "True or False",
-        "pesoQuestao": ""
-      }
-
-    },
-    "medio":{
-
-    },
-    "dificil":{
-
-    },
-    "adicionadasPeloEstudante":{
-      
-    }
-  }
+  "nome":""
 }
