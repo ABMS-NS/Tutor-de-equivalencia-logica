@@ -1,0 +1,357 @@
+{
+    "nome": "Estudante_Geral",
+    "usa_llm": true,
+    "nivel_atual": 1,
+    "modulos_liberados": {
+        "nivel_1": true,
+        "nivel_2": true,
+        "nivel_3": true
+    },
+    "respostas": {
+        "nivel_1": [],
+        "nivel_2": [],
+        "nivel_3": []
+    },
+    "notas": {
+        "nivel_1": null,
+        "nivel_2": null,
+        "nivel_3": null
+    },
+    "dificuldade_media": {
+        "nivel_1": null,
+        "nivel_2": null,
+        "nivel_3": null
+    },
+    "tentativas_por_nivel": {
+        "nivel_1": 0,
+        "nivel_2": 0,
+        "nivel_3": 0
+    },
+    "questionario": [
+        1,
+        2,
+        2
+    ],
+    "data_criacao": "2025-07-01T18:48:06.579729",
+    "score_questionario": 5,
+    "niveis": {
+        "1": {
+            "liberado": true,
+            "concluido_com_sucesso": true,
+            "dificuldade_media": 0,
+            "questoes_respondidas": [],
+            "tentativas_anteriores": [
+                {
+                    "data_conclusao": "2025-07-01T19:18:19.432633",
+                    "acertos": 9,
+                    "total_questoes": 10,
+                    "dificuldade_media": 0.5,
+                    "resumo_questoes": [
+                        {
+                            "id": 1,
+                            "tempo_gasto": 14.004973649978638,
+                            "erros": 0,
+                            "dicas_fixas_usadas": 2,
+                            "dicas_llm_usadas": 0,
+                            "acertou": true,
+                            "resposta_final": "Passos:\n¬¬p\np",
+                            "dificuldade_calculada": 1.0,
+                            "data": "2025-07-01T19:05:46.575202"
+                        },
+                        {
+                            "id": 2,
+                            "tempo_gasto": 95.82266879081726,
+                            "erros": 0,
+                            "dicas_fixas_usadas": 0,
+                            "dicas_llm_usadas": 0,
+                            "acertou": true,
+                            "resposta_final": "Passos:\np ∧ q\nq ∧ p",
+                            "dificuldade_calculada": 0.0,
+                            "data": "2025-07-01T19:08:23.167137"
+                        },
+                        {
+                            "id": 3,
+                            "tempo_gasto": 8.202780961990356,
+                            "erros": 0,
+                            "dicas_fixas_usadas": 0,
+                            "dicas_llm_usadas": 0,
+                            "acertou": true,
+                            "resposta_final": "Passos:\np ∨ q\nq ∨ p",
+                            "dificuldade_calculada": 0.0,
+                            "data": "2025-07-01T19:09:14.971974"
+                        },
+                        {
+                            "id": 4,
+                            "tempo_gasto": 48.77820134162903,
+                            "erros": 0,
+                            "dicas_fixas_usadas": 0,
+                            "dicas_llm_usadas": 0,
+                            "acertou": true,
+                            "resposta_final": "Passos:\n¬(p ∧ q)\n(¬p ∨ ¬q)",
+                            "dificuldade_calculada": 0.0,
+                            "data": "2025-07-01T19:10:28.100146"
+                        },
+                        {
+                            "id": 5,
+                            "tempo_gasto": 17.161177396774292,
+                            "erros": 0,
+                            "dicas_fixas_usadas": 0,
+                            "dicas_llm_usadas": 0,
+                            "acertou": true,
+                            "resposta_final": "Passos:\n¬(p ∨ q)\n¬p ∧ ¬q",
+                            "dificuldade_calculada": 0.0,
+                            "data": "2025-07-01T19:11:10.714597"
+                        },
+                        {
+                            "id": 6,
+                            "tempo_gasto": 171.7655894756317,
+                            "erros": 0,
+                            "dicas_fixas_usadas": 2,
+                            "dicas_llm_usadas": 3,
+                            "acertou": true,
+                            "resposta_final": "Passos:\n(p ∧ q) ∧ r\n(p ∧ q ∧ r)\np ∧  (q ∧ r)",
+                            "dificuldade_calculada": 4.0,
+                            "data": "2025-07-01T19:14:23.636706"
+                        },
+                        {
+                            "id": 7,
+                            "tempo_gasto": 16.84778904914856,
+                            "erros": 0,
+                            "dicas_fixas_usadas": 0,
+                            "dicas_llm_usadas": 0,
+                            "acertou": false,
+                            "resposta_final": "Passos:\n(p ∨ q) ∨ r\np ∨ (q ∨ r)",
+                            "dificuldade_calculada": 0.0,
+                            "data": "2025-07-01T19:15:21.908352"
+                        },
+                        {
+                            "id": 8,
+                            "tempo_gasto": 10.981210947036743,
+                            "erros": 0,
+                            "dicas_fixas_usadas": 0,
+                            "dicas_llm_usadas": 0,
+                            "acertou": true,
+                            "resposta_final": "Passos:\np ∧ p\np",
+                            "dificuldade_calculada": 0.0,
+                            "data": "2025-07-01T19:16:44.324508"
+                        },
+                        {
+                            "id": 9,
+                            "tempo_gasto": 8.936344385147095,
+                            "erros": 0,
+                            "dicas_fixas_usadas": 0,
+                            "dicas_llm_usadas": 0,
+                            "acertou": true,
+                            "resposta_final": "Passos:\np ∨ p\np",
+                            "dificuldade_calculada": 0.0,
+                            "data": "2025-07-01T19:17:12.789174"
+                        },
+                        {
+                            "id": 10,
+                            "tempo_gasto": 9.262989044189453,
+                            "erros": 0,
+                            "dicas_fixas_usadas": 0,
+                            "dicas_llm_usadas": 0,
+                            "acertou": true,
+                            "resposta_final": "Passos:\np ↔ q\nq ↔ p",
+                            "dificuldade_calculada": 0.0,
+                            "data": "2025-07-01T19:18:16.028690"
+                        }
+                    ]
+                }
+            ],
+            "acertos_ultima_tentativa": 9,
+            "total_questoes_ultima_tentativa": 10,
+            "dificuldade_media_ultima_tentativa": 0.5
+        },
+        "2": {
+            "liberado": true,
+            "concluido_com_sucesso": false,
+            "dificuldade_media": 0.0,
+            "questoes_respondidas": [],
+            "tentativas_anteriores": []
+        },
+        "3": {
+            "liberado": true,
+            "concluido_com_sucesso": false,
+            "dificuldade_media": 0,
+            "questoes_respondidas": [],
+            "tentativas_anteriores": [
+                {
+                    "data_conclusao": "2025-07-01T20:54:38.740928",
+                    "acertos": 2,
+                    "total_questoes": 4,
+                    "dificuldade_media": 1.0032181945112018,
+                    "resumo_questoes": [
+                        {
+                            "id": 1,
+                            "tempo_gasto": 123.03609275817871,
+                            "erros": 0,
+                            "dicas_fixas_usadas": 2,
+                            "dicas_llm_usadas": 0,
+                            "acertou": true,
+                            "resposta_final": "S1: (p ∨ q) → r\nS2: ¬r → (¬p ∧ ¬q)\nPassos:\n(p ∨ q) → r\n¬r → ¬ ( p  ∨ q)\n¬r → (¬p ∧ ¬q)",
+                            "dificuldade_calculada": 1.0,
+                            "data": "2025-07-01T19:52:41.394788"
+                        },
+                        {
+                            "id": 2,
+                            "tempo_gasto": 48.50435948371887,
+                            "erros": 0,
+                            "dicas_fixas_usadas": 0,
+                            "dicas_llm_usadas": 0,
+                            "acertou": true,
+                            "resposta_final": "S1: ¬p ∨ q\nS2: p → q\nPassos:\n¬p ∨ q\np → q",
+                            "dificuldade_calculada": 0.0,
+                            "data": "2025-07-01T19:54:05.044634"
+                        },
+                        {
+                            "id": 3,
+                            "tempo_gasto": 110.28179502487183,
+                            "erros": 0,
+                            "dicas_fixas_usadas": 2,
+                            "dicas_llm_usadas": 0,
+                            "acertou": false,
+                            "resposta_final": "S1: (p ↔ q)\nS2: (p →  q) ∧ ( ¬p → ¬q)\nPassos:\n(p ↔ q)\n(p →  q) ∧ (q → p)\n(p →  q) ∧ (¬p → ¬q)",
+                            "dificuldade_calculada": 1.0,
+                            "data": "2025-07-01T19:56:28.643700"
+                        },
+                        {
+                            "id": 4,
+                            "tempo_gasto": 362.3171000480652,
+                            "erros": 0,
+                            "dicas_fixas_usadas": 0,
+                            "dicas_llm_usadas": 0,
+                            "acertou": false,
+                            "resposta_final": "Passos:\n¬((A ∨ B) ∧ (¬C ∨ D))\n(¬(A ∨ B) ∨ ¬(¬C ∨ D))\n((¬A ∧ ¬B) ∨ ¬(¬C ∨ D))\n((¬A ∧ ¬B) ∨ (¬¬C ∧ ¬D))\n((¬A ∧ ¬B) ∨ (C ∧ ¬D))",
+                            "dificuldade_calculada": 2.0128727780448066,
+                            "data": "2025-07-01T20:03:44.230720"
+                        }
+                    ]
+                },
+                {
+                    "data_conclusao": "2025-07-01T21:04:02.260246",
+                    "acertos": 0,
+                    "total_questoes": 10,
+                    "dificuldade_media": 0.1,
+                    "resumo_questoes": [
+                        {
+                            "id": 1,
+                            "tempo_gasto": 9.915627479553223,
+                            "erros": 0,
+                            "dicas_fixas_usadas": 0,
+                            "dicas_llm_usadas": 0,
+                            "acertou": false,
+                            "resposta_final": "S1: p\nS2: q\nPassos:\nq",
+                            "dificuldade_calculada": 0.0,
+                            "data": "2025-07-01T20:55:18.436372"
+                        },
+                        {
+                            "id": 2,
+                            "tempo_gasto": 8.467883825302124,
+                            "erros": 0,
+                            "dicas_fixas_usadas": 2,
+                            "dicas_llm_usadas": 0,
+                            "acertou": false,
+                            "resposta_final": "S1: 32324\nS2: 434343\nPassos:\np",
+                            "dificuldade_calculada": 1.0,
+                            "data": "2025-07-01T20:56:23.256075"
+                        },
+                        {
+                            "id": 3,
+                            "tempo_gasto": 5.348819255828857,
+                            "erros": 0,
+                            "dicas_fixas_usadas": 0,
+                            "dicas_llm_usadas": 0,
+                            "acertou": false,
+                            "resposta_final": "S1: ppp\nS2: oooo\nPassos:\nppp",
+                            "dificuldade_calculada": 0.0,
+                            "data": "2025-07-01T20:57:06.318120"
+                        },
+                        {
+                            "id": 4,
+                            "tempo_gasto": 2.438793182373047,
+                            "erros": 0,
+                            "dicas_fixas_usadas": 0,
+                            "dicas_llm_usadas": 0,
+                            "acertou": false,
+                            "resposta_final": "Passos:\np",
+                            "dificuldade_calculada": 0.0,
+                            "data": "2025-07-01T20:58:13.077894"
+                        },
+                        {
+                            "id": 5,
+                            "tempo_gasto": 5.251790761947632,
+                            "erros": 0,
+                            "dicas_fixas_usadas": 0,
+                            "dicas_llm_usadas": 0,
+                            "acertou": false,
+                            "resposta_final": "Passos:\n(((A ∧ ¬B) → C) → (B ∨ C))",
+                            "dificuldade_calculada": 0.0,
+                            "data": "2025-07-01T20:58:39.791535"
+                        },
+                        {
+                            "id": 6,
+                            "tempo_gasto": 3.986311435699463,
+                            "erros": 0,
+                            "dicas_fixas_usadas": 0,
+                            "dicas_llm_usadas": 0,
+                            "acertou": false,
+                            "resposta_final": "Passos:\npoopp",
+                            "dificuldade_calculada": 0.0,
+                            "data": "2025-07-01T20:59:49.815967"
+                        },
+                        {
+                            "id": 7,
+                            "tempo_gasto": 5.7583558559417725,
+                            "erros": 0,
+                            "dicas_fixas_usadas": 0,
+                            "dicas_llm_usadas": 0,
+                            "acertou": false,
+                            "resposta_final": "S1: 323\nS2: 4343\nPassos:\np v q",
+                            "dificuldade_calculada": 0.0,
+                            "data": "2025-07-01T21:00:35.787222"
+                        },
+                        {
+                            "id": 8,
+                            "tempo_gasto": 5.432780027389526,
+                            "erros": 0,
+                            "dicas_fixas_usadas": 0,
+                            "dicas_llm_usadas": 0,
+                            "acertou": false,
+                            "resposta_final": "S1: p\nS2: q\nPassos:\np v q",
+                            "dificuldade_calculada": 0.0,
+                            "data": "2025-07-01T21:01:57.684256"
+                        },
+                        {
+                            "id": 9,
+                            "tempo_gasto": 1.6587998867034912,
+                            "erros": 0,
+                            "dicas_fixas_usadas": 0,
+                            "dicas_llm_usadas": 0,
+                            "acertou": false,
+                            "resposta_final": "Passos:\np",
+                            "dificuldade_calculada": 0.0,
+                            "data": "2025-07-01T21:02:23.743875"
+                        },
+                        {
+                            "id": 10,
+                            "tempo_gasto": 2.7962217330932617,
+                            "erros": 0,
+                            "dicas_fixas_usadas": 0,
+                            "dicas_llm_usadas": 0,
+                            "acertou": false,
+                            "resposta_final": "Passos:\np",
+                            "dificuldade_calculada": 0.0,
+                            "data": "2025-07-01T21:04:01.068592"
+                        }
+                    ]
+                }
+            ],
+            "acertos_ultima_tentativa": 0,
+            "total_questoes_ultima_tentativa": 10,
+            "dificuldade_media_ultima_tentativa": 0.1
+        }
+    },
+    "ultima_modificacao": "2025-07-01T21:04:02.260656"
+}

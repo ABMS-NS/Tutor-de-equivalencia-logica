@@ -1,4 +1,4 @@
-from .nos_logicos import Symbol, Not, And, Or, Implies, Equivalent, Xor, V, F
+from src.especialista.nos_logicos import Symbol, Not, And, Or, Implies, Equivalent, Xor, V, F
 
 class RegrasLogicas:
     def __init__(self):
@@ -427,3 +427,158 @@ class RegrasLogicas:
             
             return Implies(And(*premissas_finais), expressao_atual)
         return exp
+
+def get_regras_formatadas():
+    """
+    Retorna uma lista de dicionários com as regras lógicas formatadas para exibição didática.
+    Cada item contém: nome, formula, explicacao e exemplo(caso necessário)
+    """
+    return [
+        {
+            "nome": "Regra 1 (Condicional ↔ Disjunção)",
+            "formula": "p → q ≡ ¬p ∨ q",
+            "explicacao": "Uma condicional pode ser reescrita como uma disjunção: se p implica q, isso é equivalente a dizer que ou não p, ou q é verdadeiro.",
+        },
+        {
+            "nome": "Regra 2 (Contraposição)",
+            "formula": "p → q ≡ ¬q → ¬p",
+            "explicacao": "A contrapositiva de uma condicional é logicamente equivalente à condicional original.",
+        },
+        {
+            "nome": "Regra 3 (Bicondicional ↔ Conjunção de Condicionais)",
+            "formula": "p ↔ q ≡ (p → q) ∧ (q → p)",
+            "explicacao": "Um bicondicional é verdadeiro quando ambos os condicionais são verdadeiros.",
+        },
+        {
+            "nome": "Regra 4 (Bicondicional ↔ Disjunção de Conjunções)",
+            "formula": "p ↔ q ≡ (p ∧ q) ∨ (¬p ∧ ¬q)",
+            "explicacao": "O bicondicional é verdadeiro quando ambos são verdadeiros ou ambos são falsos.",
+        },
+        {
+            "nome": "Regra 5 (Bicondicional ↔ Negação do XOR)",
+            "formula": "p ↔ q ≡ ¬(p ⊻ q)",
+            "explicacao": "O bicondicional é verdadeiro quando p e q têm o mesmo valor lógico.",
+        },
+        {
+            "nome": "Regra 6 (Dupla Negação)",
+            "formula": "¬¬p ≡ p",
+            "explicacao": "Negar duas vezes uma proposição retorna ao valor original.",
+        },
+        {
+            "nome": "Regra 7 (De Morgan para Conjunção)",
+            "formula": "¬(p ∧ q ∧ ...) ≡ ¬p ∨ ¬q ∨ ...",
+            "explicacao": "A negação de uma conjunção é equivalente à disjunção das negações.",
+        },
+        {
+            "nome": "Regra 8 (De Morgan para Disjunção)",
+            "formula": "¬(p ∨ q ∨ ...) ≡ ¬p ∧ ¬q ∧ ...",
+            "explicacao": "A negação de uma disjunção é equivalente à conjunção das negações.",
+        },
+        {
+            "nome": "Regra 9 (Comutatividade da Conjunção)",
+            "formula": "p ∧ q ∧ ... ≡ q ∧ p ∧ ...",
+            "explicacao": "A ordem dos fatores não altera o produto na conjunção.",
+        },
+        {
+            "nome": "Regra 10 (Comutatividade da Disjunção)",
+            "formula": "p ∨ q ∨ ... ≡ q ∨ p ∨ ...",
+            "explicacao": "A ordem dos fatores não altera a soma na disjunção.",
+        },
+        {
+            "nome": "Regra 11 (Comutatividade da Bicondicional)",
+            "formula": "p ↔ q ≡ q ↔ p",
+            "explicacao": "A ordem dos termos em um bicondicional não altera seu valor lógico.",
+        },
+        {
+            "nome": "Regra 12 (Associatividade da Conjunção)",
+            "formula": "(p ∧ q) ∧ r ... ≡ p ∧ q ∧ r ...",
+            "explicacao": "A forma como os termos são agrupados na conjunção não altera o resultado.",
+        },
+        {
+            "nome": "Regra 13 (Associatividade da Disjunção)",
+            "formula": "(p ∨ q) ∨ r ... ≡ p ∨ q ∨ r ...",
+            "explicacao": "A forma como os termos são agrupados na disjunção não altera o resultado.",
+        },
+        {
+            "nome": "Regra 14 (Associatividade da Bicondicional)",
+            "formula": "(p ↔ q) ↔ r ≡ p ↔ (q ↔ r)",
+            "explicacao": "A forma como os termos são agrupados em um bicondicional não altera seu valor lógico.",
+        },
+        {
+            "nome": "Regra 15 (Distributividade da Conjunção sobre Disjunção)",
+            "formula": "p ∧ (q ∨ r) ≡ (p ∧ q) ∨ (p ∧ r)",
+            "explicacao": "A conjunção distribui sobre a disjunção da mesma forma que a multiplicação distribui sobre a adição.",
+        },
+        {
+            "nome": "Regra 16 (Distributividade da Disjunção sobre Conjunção)",
+            "formula": "p ∨ (q ∧ r) ≡ (p ∨ q) ∧ (p ∨ r)",
+            "explicacao": "A disjunção distribui sobre a conjunção da mesma forma que a adição distribui sobre a multiplicação.",
+        },
+        {
+            "nome": "Regra 17 (Idempotência da Conjunção)",
+            "formula": "p ∧ p ∧ q ≡ p ∧ q",
+            "explicacao": "Repetir o mesmo fator na conjunção não altera o resultado.",
+        },
+        {
+            "nome": "Regra 18 (Idempotência da Disjunção)",
+            "formula": "p ∨ p ∨ q ≡ p ∨ q",
+            "explicacao": "Repetir o mesmo termo na disjunção não altera o resultado.",
+        },
+        {
+            "nome": "Regra 19 (Identidade da Conjunção)",
+            "formula": "p ∧ V ≡ p",
+            "explicacao": "A conjunção com o elemento neutro V (verdade) não altera o valor da proposição.",
+        },
+        {
+            "nome": "Regra 20 (Identidade da Disjunção)",
+            "formula": "p ∨ F ≡ p",
+            "explicacao": "A disjunção com o elemento neutro F (falsidade) não altera o valor da proposição.",
+        },
+        {
+            "nome": "Regra 21 (Dominação da Conjunção)",
+            "formula": "p ∧ F ∧ q ≡ F",
+            "explicacao": "A presença de F (falsidade) em uma conjunção a torna falsa.",
+        },
+        {
+            "nome": "Regra 22 (Dominação da Disjunção)",
+            "formula": "p ∨ V ∨ q ≡ V",
+            "explicacao": "A presença de V (verdade) em uma disjunção a torna verdadeira.",
+        },
+        {
+            "nome": "Regra 23 (Contradição)",
+            "formula": "p ∧ ¬p ∧ q ≡ F",
+            "explicacao": "Uma contradição sempre resulta em falsidade.",
+        },
+        {
+            "nome": "Regra 24 (Tautologia)",
+            "formula": "p ∨ ¬p ∨ q ≡ V",
+            "explicacao": "Uma tautologia sempre resulta em verdade.",
+        },
+        {
+            "nome": "Regra 25 (Absorção da Conjunção)",
+            "formula": "p ∧ (p ∨ q) ∧ r ≡ p ∧ r",
+            "explicacao": "A conjunção de p com a disjunção de p e q é equivalente a p e r.",
+        },
+        {
+            "nome": "Regra 26 (Absorção da Disjunção)",
+            "formula": "p ∨ (p ∧ q) ∨ r ≡ p ∨ r",
+            "explicacao": "A disjunção de p com a conjunção de p e q é equivalente a p ou r.",
+        },
+        {
+            "nome": "Regra 27 (Definição do OU Exclusivo)",
+            "formula": "p ⊻ q ≡ (p ∨ q) ∧ ¬(p ∧ q)",
+            "explicacao": "O OU exclusivo é verdadeiro quando p ou q são verdadeiros, mas não ambos.",
+        },
+        {
+            "nome": "Regra 28 (Exportação)",
+            "formula": "(p ∧ q ∧ ...) → r ≡ p → (q → (... → r))",
+            "explicacao": "A exportação permite transformar uma condicional com conjunção de premissas em uma cadeia de condicionais aninhados.",
+            "exemplo": "Exemplo: (p ∧ q) → r ≡ p → (q → r)"
+        },
+        {
+            "nome": "Regra 29 (Importação)",
+            "formula": "p → (q → (... → r)) ≡ (p ∧ q ∧ ...) → r",
+            "explicacao": "A importação faz o caminho inverso da exportação, agrupando premissas de condicionais aninhados em uma única conjunção.",
+            "exemplo": "Exemplo: p → (q → r) ≡ (p ∧ q) → r"
+        },                
+    ]   

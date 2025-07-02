@@ -2,7 +2,7 @@
 Utilitários para o sistema de equivalências lógicas.
 """
 
-from .especialista.nos_logicos import Symbol, Equivalent, Xor, Implies, And, Or, Not, V, F
+from src.especialista.nos_logicos import Symbol, Equivalent, Xor, Implies, And, Or, Not, V, F
 from sympy import symbols, simplify_logic, And as sAnd, Or as sOr, Not as sNot, Implies as sImplies, Equivalent as sEquivalent
 
 
@@ -244,14 +244,73 @@ def iguais_comutativos(expr1, expr2):
 
 def verificar_equivalencia(expr1, expr2):
     """
-    Retorna True se expr1 e expr2 são equivalentes (por FNC ou SymPy), senão retorna None.
+    Retorna (True, "mensagem") se expr1 e expr2 são equivalentes, senão retorna (False, "mensagem").
+    Primeiro tenta via FNC, depois usa SymPy como fallback.
     """
-    cnf1 = para_cnf(expr1)
-    cnf2 = para_cnf(expr2)
-    if iguais_comutativos(cnf1, cnf2):
-        return True, None
-    else:
-        # Só executa SymPy se FNC falhar
+    try:
+        # 1. Tentativa com FNC (mais rápido para casos simples)
+        cnf1 = para_cnf(expr1)
+        cnf2 = para_cnf(expr2)
+        if iguais_comutativos(cnf1, cnf2):
+            return True, "Equivalente (verificado por FNC)."
+    except Exception:
+        pass
+    try:
         s1 = para_sympy(expr1)
         s2 = para_sympy(expr2)
-        return simplify_logic(s1 ^ s2) == False, None
+        
+        # simplify_logic pode retornar True, False ou uma expressão simplificada.
+        # A verificação `== True` garante que apenas uma tautologia inequívoca seja aceita.
+        equivalente = simplify_logic(sEquivalent(s1, s2)) == True
+        
+        if equivalente:
+            return True, "Equivalente (verificado por SymPy)."
+        else:
+            return False, "As expressões não são logicamente equivalentes."
+            
+    except Exception as e_sympy:
+        return False, f"Erro ao verificar equivalência com SymPy: {e_sympy}"
+
+# --- UI UTILS ---
+
+def centralizar_janela(janela, largura, altura):
+    """Centraliza a janela na tela"""
+    x = (janela.winfo_screenwidth() // 2) - (largura // 2)
+    y = (janela.winfo_screenheight() // 2) - (altura // 2)
+    janela.geometry(f"{largura}x{altura}+{x}+{y}")
+
+def processar_resposta(resposta_usuario, questao):
+    """Processa a resposta do usuário"""
+    from tkinter import messagebox
+    
+    if not resposta_usuario.strip():
+        messagebox.showwarning("Aviso", "Por favor, digite uma resposta!")
+        return
+    
+    # A lógica de verificação será implementada no módulo do avaliador
+    messagebox.showinfo("Resposta Enviada", f"Resposta recebida: {resposta_usuario[:50]}...")
+
+def enviar_mensagem_llm(entrada, area_conversa):
+    """Envia mensagem para o assistente LLM"""
+    mensagem = entrada.get().strip()
+    
+    if not mensagem:
+        return
+    
+    # Adicionar mensagem do usuário na conversa
+    area_conversa.configure(state="normal")
+    area_conversa.insert("end", f"👤 Você: {mensagem}\n\n")
+    
+    # A chamada real à API da LLM será feita no módulo llm_interface
+    # Exemplo de como adicionar resposta:
+    # resposta_llm = "sua_funcao_api_llm(mensagem)"
+    # area_conversa.insert("end", f"🤖 Assistente: {resposta_llm}\n\n")
+    
+    # Placeholder da resposta
+    area_conversa.insert("end", "🤖 Assistente: Funcionalidade será implementada em breve!\n\n")
+    
+    area_conversa.configure(state="disabled")
+    area_conversa.see("end")  # Scroll para o final
+    
+    # Limpar campo de entrada
+    entrada.delete(0, "end")

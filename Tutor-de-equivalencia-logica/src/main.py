@@ -1,13 +1,7 @@
-import customtkinter as ctk
-from screens.tela_principal import MainMenu
+# main.py - Arquivo principal para executar a aplicação
 
-ctk.set_appearance_mode("dark")
-ctk.set_default_color_theme("blue")
+from src.screens.tutor_logica import TutorLogica
 
-app = ctk.CTk()
-app.title("Sistema de Aprendizagem")
-app.geometry("900x600")
-
-MainMenu(app).pack(fill="both", expand=True)
-
-app.mainloop()
+if __name__ == "__main__":
+    app = TutorLogica()
+    app.executar()
