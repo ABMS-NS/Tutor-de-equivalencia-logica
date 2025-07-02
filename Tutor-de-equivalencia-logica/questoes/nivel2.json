@@ -18,8 +18,7 @@
         ],
         "conceitos": ["condicional_disjuncao", "de_morgan", "dupla_negacao", "negacao_implicacao"],
         "dica1": "Para negar uma implicação, primeiro converta-a em disjunção.",
-        "dica2": "Use De Morgan para distribuir a negação sobre a disjunção.",
-        "acertou":"False"
+        "dica2": "Use De Morgan para distribuir a negação sobre a disjunção."
     },
     {
         "id": 2,
@@ -38,8 +37,7 @@
         ],
         "conceitos": ["condicional_disjuncao", "equivalencia_fundamental"],
         "dica1": "Esta é uma das equivalências mais fundamentais da lógica proposicional.",
-        "dica2": "A implicação 'P → Q' é definida como '¬P ∨ Q'.",
-        "acertou":"False"
+        "dica2": "A implicação 'P → Q' é definida como '¬P ∨ Q'."
     },
     {
         "id": 3,
@@ -59,8 +57,7 @@
         ],
         "conceitos": ["condicional_disjuncao", "equivalencia_fundamental", "implicacao_conjuncao"],
         "dica1": "Use a equivalência fundamental entre implicação e disjunção.",
-        "dica2": "A implicação (P ∧ Q) → R é definida como ¬(P ∧ Q) ∨ R.",
-        "acertou":"False"
+        "dica2": "A implicação (P ∧ Q) → R é definida como ¬(P ∧ Q) ∨ R."
     },
     {
         "id": 4,
@@ -82,8 +79,7 @@
         ],
         "conceitos": ["condicional_disjuncao", "distributividade", "contradicao", "elemento_neutro"],
         "dica1": "Converta ambas as implicações em disjunções e use distributividade.",
-        "dica2": "Observe que 'q ∧ ¬q' é sempre falso (contradição).",
-        "acertou":"False"
+        "dica2": "Observe que 'q ∧ ¬q' é sempre falso (contradição)."
     },
     {
         "id": 5,
@@ -104,8 +100,7 @@
         ],
         "conceitos": ["condicional_disjuncao", "dupla_negacao", "negacao_conjuncao"],
         "dica1": "Converta a implicação em disjunção usando a regra fundamental.",
-        "dica2": "Simplifique a dupla negação para obter o resultado final.",
-        "acertou":"False"
+        "dica2": "Simplifique a dupla negação para obter o resultado final."
     },
     {
         "id": 6,
@@ -128,8 +123,7 @@
         ],
         "conceitos": ["condicional_disjuncao", "de_morgan", "distributividade", "decomposicao_implicacao"],
         "dica1": "Use De Morgan para transformar a negação da disjunção em conjunção de negações.",
-        "dica2": "Aplique distributividade para separar as implicações.",
-        "acertou":"False"
+        "dica2": "Aplique distributividade para separar as implicações."
     },
     {
         "id": 7,
@@ -150,8 +144,7 @@
         ],
         "conceitos": ["condicional_disjuncao", "de_morgan", "dupla_negacao", "negacao_implicacao"],
         "dica1": "Esta é a forma padrão de negar uma implicação.",
-        "dica2": "¬(P → Q) sempre equivale a P ∧ ¬Q.",
-        "acertou":"False"
+        "dica2": "¬(P → Q) sempre equivale a P ∧ ¬Q."
     },
     {
         "id": 8,
@@ -174,8 +167,7 @@
         ],
         "conceitos": ["condicional_disjuncao", "dupla_negacao", "distributividade", "contradicao", "elemento_neutro"],
         "dica1": "Converta ambas as implicações em disjunções.",
-        "dica2": "Use distributividade e observe que ¬A ∧ A é sempre falso.",
-        "acertou":"False"
+        "dica2": "Use distributividade e observe que ¬A ∧ A é sempre falso."
     },
     {
         "id": 9,
@@ -195,8 +187,7 @@
         ],
         "conceitos": ["condicional_disjuncao", "equivalencia_fundamental"],
         "dica1": "Esta é outra aplicação direta da equivalência fundamental entre implicação e disjunção.",
-        "dica2": "¬P ∨ Q sempre equivale a P → Q.",
-        "acertou":"False"
+        "dica2": "¬P ∨ Q sempre equivale a P → Q."
     },
     {
         "id": 10,
@@ -217,7 +208,6 @@
         ],
         "conceitos": ["distributividade", "contradicao", "elemento_neutro", "simplificacao"],
         "dica1": "Use a distributividade da disjunção sobre a conjunção.",
-        "dica2": "Observe que Q ∧ ¬Q é sempre falso, simplificando a expressão.",
-        "acertou":"False"
+        "dica2": "Observe que Q ∧ ¬Q é sempre falso, simplificando a expressão."
     }
 ]
