@@ -15,7 +15,8 @@
         ],
         "conceitos": ["dupla_negacao", "simplificacao_basica"],
         "dica1": "A dupla negação cancela-se mutuamente.",
-        "dica2": "¬¬p é sempre equivalente a p."
+        "dica2": "¬¬p é sempre equivalente a p.",
+        "acertou":"False"
     },
     {
         "id": 2,
@@ -34,7 +35,8 @@
         ],
         "conceitos": ["comutatividade", "conjuncao"],
         "dica1": "A ordem dos elementos em uma conjunção não altera o resultado.",
-        "dica2": "A conjunção é comutativa: p ∧ q ≡ q ∧ p."
+        "dica2": "A conjunção é comutativa: p ∧ q ≡ q ∧ p.",
+        "acertou":"False"
     },
     {
         "id": 3,
@@ -53,7 +55,8 @@
         ],
         "conceitos": ["comutatividade", "disjuncao"],
         "dica1": "A ordem dos elementos em uma disjunção não altera o resultado.",
-        "dica2": "A disjunção é comutativa: p ∨ q ≡ q ∨ p."
+        "dica2": "A disjunção é comutativa: p ∨ q ≡ q ∨ p.",
+        "acertou":"False"
     },
     {
         "id": 4,
@@ -72,7 +75,8 @@
         ],
         "conceitos": ["de_morgan", "negacao_conjuncao"],
         "dica1": "A negação de uma conjunção torna-se uma disjunção de negações.",
-        "dica2": "Lei de De Morgan: ¬(p ∧ q) ≡ ¬p ∨ ¬q."
+        "dica2": "Lei de De Morgan: ¬(p ∧ q) ≡ ¬p ∨ ¬q.",
+        "acertou":"False"
     },
     {
         "id": 5,
@@ -91,7 +95,8 @@
         ],
         "conceitos": ["de_morgan", "negacao_disjuncao"],
         "dica1": "A negação de uma disjunção torna-se uma conjunção de negações.",
-        "dica2": "Lei de De Morgan: ¬(p ∨ q) ≡ ¬p ∧ ¬q."
+        "dica2": "Lei de De Morgan: ¬(p ∨ q) ≡ ¬p ∧ ¬q.",
+        "acertou":"False"
     },
     {
         "id": 6,
@@ -112,7 +117,8 @@
         ],
         "conceitos": ["associatividade", "conjuncao"],
         "dica1": "O agrupamento de conjunções não altera o resultado final.",
-        "dica2": "A conjunção é associativa: (p ∧ q) ∧ r ≡ p ∧ (q ∧ r)."
+        "dica2": "A conjunção é associativa: (p ∧ q) ∧ r ≡ p ∧ (q ∧ r).",
+        "acertou":"False"
     },
     {
         "id": 7,
@@ -133,7 +139,8 @@
         ],
         "conceitos": ["associatividade", "disjuncao"],
         "dica1": "O agrupamento de disjunções não altera o resultado final.",
-        "dica2": "A disjunção é associativa: (p ∨ q) ∨ r ≡ p ∨ (q ∨ r)."
+        "dica2": "A disjunção é associativa: (p ∨ q) ∨ r ≡ p ∨ (q ∨ r).",
+        "acertou":"False"
     },
     {
         "id": 8,
@@ -151,7 +158,8 @@
         ],
         "conceitos": ["idempotencia", "conjuncao", "simplificacao"],
         "dica1": "Uma proposição conjungida consigo mesma é equivalente à própria proposição.",
-        "dica2": "Idempotência da conjunção: p ∧ p ≡ p."
+        "dica2": "Idempotência da conjunção: p ∧ p ≡ p.",
+        "acertou":"False"
     },
     {
         "id": 9,
@@ -169,7 +177,8 @@
         ],
         "conceitos": ["idempotencia", "disjuncao", "simplificacao"],
         "dica1": "Uma proposição disjungida consigo mesma é equivalente à própria proposição.",
-        "dica2": "Idempotência da disjunção: p ∨ p ≡ p."
+        "dica2": "Idempotência da disjunção: p ∨ p ≡ p.",
+        "acertou":"False"
     },
     {
         "id": 10,
@@ -188,6 +197,7 @@
         ],
         "conceitos": ["comutatividade", "bicondicional"],
         "dica1": "A ordem dos elementos em um bicondicional não altera o resultado.",
-        "dica2": "O bicondicional é comutativo: p ↔ q ≡ q ↔ p."
+        "dica2": "O bicondicional é comutativo: p ↔ q ≡ q ↔ p.",
+        "acertou":"False"
     }
 ]
