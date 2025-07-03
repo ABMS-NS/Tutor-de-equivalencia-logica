@@ -2,6 +2,7 @@
 import customtkinter as ctk
 from tkinter import messagebox
 import time
+import re
 import os
 import json
 from src.config import EXERCISE_WINDOW, NIVEIS_CONFIG
@@ -53,7 +54,7 @@ class ExerciseWindow:
         self.start_time = None
         self.timer_id = None
         
-        # ✅ NOVO: Controle do tipo de questão
+       
         self.tipo_questao_atual = None
 
         # --- Configuração da Janela ---
@@ -183,7 +184,7 @@ class ExerciseWindow:
         frame_resposta.grid(row=2, column=0, sticky="nsew", padx=10, pady=5)
         frame_resposta.grid_columnconfigure(0, weight=1)
         
-        # ✅ GUARDAR REFERÊNCIA para poder recriá-lo depois
+        # Armazenar referência para o frame de resposta
         self.frame_resposta = frame_resposta
         
         # Título da seção
@@ -197,7 +198,7 @@ class ExerciseWindow:
         )
         label_titulo.pack(side="left")
 
-        # ✅ VERIFICAÇÃO MELHORADA: Garantir que questões existem
+        # Garantir questões existem e estão carregadas
         if not hasattr(self, 'questoes') or not self.questoes or self.questao_idx >= len(self.questoes):
             temp_label = ctk.CTkLabel(frame_resposta, text="Carregando questão...")
             temp_label.grid(row=1, column=0, pady=50)
@@ -210,12 +211,12 @@ class ExerciseWindow:
         self.campos_passos = []
         tipo_questao = questao_atual.get("tipo", "simbolica")
         
-        # ✅ ATUALIZAR TIPO ATUAL
+        # Atualizar Tipo atual de questão
         self.tipo_questao_atual = tipo_questao
         
         current_row = 1
 
-        # ✅ CORREÇÃO: Só criar campos de tradução se for questão de tradução
+        #  Só criar campos de tradução se for questão de tradução
         if tipo_questao == "traducao":
             frame_traducao = ctk.CTkFrame(frame_resposta)
             frame_traducao.grid(row=current_row, column=0, sticky="ew", padx=15, pady=5)
@@ -563,7 +564,7 @@ class ExerciseWindow:
         else:
             self.btn_dica_llm.configure(state="normal")
 
-    # ✅ NOVO MÉTODO: Recria a interface quando o tipo muda
+    
     def _recriar_frame_resposta(self):
         """Recria completamente o frame de resposta quando o tipo de questão muda"""
         print(f"🔄 Recriando frame de resposta para tipo: {self.tipo_questao_atual}")
@@ -588,7 +589,7 @@ class ExerciseWindow:
         self.erros_tentativa_atual = 0
         self.dicas_fixas_usadas = 0
 
-        # ✅ NOVO: Verificar se mudou o tipo de questão
+        # verificar o tipo de questão atual
         questao_atual = self.questoes[self.questao_idx]
         tipo_atual = questao_atual.get("tipo", "simbolica")
         
@@ -647,15 +648,14 @@ class ExerciseWindow:
         self.timer_id = self.window.after(1000, self.atualizar_timer)
 
     def _avaliar_traducao_correta(self, avaliacao_texto):
-        """✅ MÉTODO ROBUSTO: Avalia se a tradução foi considerada correta pela API"""
+        """ Validação Robusta para garantir se a tradução está correta ou não """
         if not avaliacao_texto or not avaliacao_texto.strip():
             return False
         
-        # Normalizar texto: minúsculo, sem acentos e pontuações
-        import re
+        
         texto_normalizado = re.sub(r'[^\w\s]', '', str(avaliacao_texto).lower().strip())
         
-        # Padrões que indicam INCORRETO (verificar primeiro - mais específicos)
+        # Padrões que indicam INCORRETO 
         padroes_incorreto = [
             'incorreto',
             'incorreta', 

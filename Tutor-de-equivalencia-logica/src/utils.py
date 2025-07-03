@@ -289,28 +289,3 @@ def processar_resposta(resposta_usuario, questao):
     
     # A lógica de verificação será implementada no módulo do avaliador
     messagebox.showinfo("Resposta Enviada", f"Resposta recebida: {resposta_usuario[:50]}...")
-
-def enviar_mensagem_llm(entrada, area_conversa):
-    """Envia mensagem para o assistente LLM"""
-    mensagem = entrada.get().strip()
-    
-    if not mensagem:
-        return
-    
-    # Adicionar mensagem do usuário na conversa
-    area_conversa.configure(state="normal")
-    area_conversa.insert("end", f"👤 Você: {mensagem}\n\n")
-    
-    # A chamada real à API da LLM será feita no módulo llm_interface
-    # Exemplo de como adicionar resposta:
-    # resposta_llm = "sua_funcao_api_llm(mensagem)"
-    # area_conversa.insert("end", f"🤖 Assistente: {resposta_llm}\n\n")
-    
-    # Placeholder da resposta
-    area_conversa.insert("end", "🤖 Assistente: Funcionalidade será implementada em breve!\n\n")
-    
-    area_conversa.configure(state="disabled")
-    area_conversa.see("end")  # Scroll para o final
-    
-    # Limpar campo de entrada
-    entrada.delete(0, "end")

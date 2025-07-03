@@ -63,18 +63,13 @@ class LevelsSelectionWindow:
         """Cria um frame para cada nível com status e botões de ação."""
         status, info = verificar_status_nivel(self.dados_perfil, nivel)
 
-        # ✅ DEBUG: Verificar se status está sendo atualizado
+       
         nivel_data = self.dados_perfil["niveis"].get(str(nivel), {})
         questoes_respondidas = len(nivel_data.get("questoes_respondidas", []))
         concluido = nivel_data.get("concluido_com_sucesso", False)
         liberado = nivel_data.get("liberado", False)
         
-        print(f"🔍 DEBUG Nível {nivel}:")
-        print(f"   - Status: {status}")
-        print(f"   - Liberado: {liberado}")  
-        print(f"   - Concluído: {concluido}")
-        print(f"   - Questões: {questoes_respondidas}")
-
+      
         frame_nivel = ctk.CTkFrame(parent, border_width=1, border_color="gray25")
         frame_nivel.pack(fill="x", padx=20, pady=10, ipady=10)
         frame_nivel.grid_columnconfigure(1, weight=1)
@@ -95,15 +90,15 @@ class LevelsSelectionWindow:
         frame_botoes = ctk.CTkFrame(frame_nivel, fg_color="transparent")
         frame_botoes.grid(row=0, column=2, rowspan=2, padx=15)
 
-        # ✅ CORREÇÃO: Lógica dos botões baseada no status atual
+        
         if status in ["Disponível", "Concluído"]:
-            # ✅ Texto e cor do botão baseado no status ATUALIZADO
+           
             if status == "Concluído":
-                texto_botao = "🎮 Continuar"  # Pode jogar novamente
-                cor_botao = "#28a745"  # Verde para concluído
+                texto_botao = "🎮 Continuar" 
+                cor_botao = "#28a745" 
             else:
-                texto_botao = "🚀 Iniciar"   # Primeira vez
-                cor_botao = "#007bff"  # Azul para disponível
+                texto_botao = "🚀 Iniciar"   
+                cor_botao = "#007bff" 
                 
             btn_iniciar = ctk.CTkButton(
                 frame_botoes, 
@@ -114,7 +109,7 @@ class LevelsSelectionWindow:
             )
             btn_iniciar.pack(side="left", padx=(0, 5))
 
-            # ✅ CORREÇÃO: Botão "Nova Tentativa" para QUALQUER nível liberado
+            
             # (Tanto concluído quanto não concluído com progresso)
             nivel_data = self.dados_perfil["niveis"].get(str(nivel), {})
             tem_progresso = len(nivel_data.get("questoes_respondidas", [])) > 0
@@ -146,7 +141,7 @@ class LevelsSelectionWindow:
         ExerciseWindow(self.parent, nivel, self.app_instance, self.perfil_path)
 
     def nova_tentativa(self, nivel):
-        """✅ NOVA FUNÇÃO: Permite refazer qualquer nível liberado"""
+        """Inicia uma nova tentativa do nível, arquivando o progresso atual."""
         nivel_data = self.dados_perfil["niveis"].get(str(nivel), {})
         questoes_respondidas = len(nivel_data.get("questoes_respondidas", []))
         concluido = nivel_data.get("concluido_com_sucesso", False)

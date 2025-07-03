@@ -18,7 +18,7 @@ class ModalFinalNivel:
         self.window = ctk.CTkToplevel(parent)
         self.window.title(f"Resumo do Nível {nivel}")
         
-        # Janela maior e centralizada
+        
         largura, altura = 700, 500
         x = int(self.window.winfo_screenwidth() / 2 - largura / 2)
         y = int(self.window.winfo_screenheight() / 2 - altura / 2)
@@ -49,14 +49,14 @@ class ModalFinalNivel:
                 self.window.destroy()
                 return
             
-            # Usar dados da última tentativa
+            
             ultima_tentativa = tentativas[-1]
             total_questoes = ultima_tentativa.get("total_questoes", 0)
             acertos = ultima_tentativa.get("acertos", 0)
             dificuldade_media = ultima_tentativa.get("dificuldade_media", 0)
             percentual = (acertos / total_questoes) * 100 if total_questoes > 0 else 0
             
-            # ✅ CORREÇÃO: Usar critérios corretos do config
+           
             min_taxa = ADVANCEMENT_CRITERIA.get("min_grade", 7.0) * 10  # 7.0 -> 70%
             max_dificuldade = ADVANCEMENT_CRITERIA.get("max_difficulty", 2.0)  # 2.0
             
@@ -79,7 +79,7 @@ class ModalFinalNivel:
         )
         titulo.pack(pady=(10, 10))
 
-        # Resumo das estatísticas
+        # Resumo dos resultados
         resumo = (
             f"📊 Questões respondidas: {total_questoes}\n"
             f"✅ Acertos: {acertos}\n"

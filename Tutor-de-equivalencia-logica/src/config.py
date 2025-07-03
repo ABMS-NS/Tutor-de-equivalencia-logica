@@ -14,7 +14,7 @@ DADOS_PATH = os.path.join(BASE_DIR, 'dados')
 PERFIS_PATH = os.path.join(DADOS_PATH, 'perfis')
 LOGS_PATH = os.path.join(DADOS_PATH, 'logs')
 
-# --- Main Logic---
+# -- Configurações Gerais---
 NIVEIS = ['1', '2', '3']
 ARQUIVO_LOG = 'log.txt'
 ARQUIVO_CONFIG_PERFIL = 'perfil.json'
@@ -41,17 +41,17 @@ NIVEIS_CONFIG = {
     }
 }
 
-# --- UI THEME & APPEARANCE ---
+# --- UI Tema da Interface---
 APPEARANCE_MODE = "dark"
 COLOR_THEME = "blue"
 
-# --- UI WINDOW DIMENSIONS ---
+# --- UI Dimensões das Telas ---
 MAIN_WINDOW = {"width":800,"height": 700}
 LEVELS_WINDOW = {"width": 500, "height": 400}
 EXERCISE_WINDOW = {"width": 800, "height": 700}
 REQUIREMENTS_WINDOW = {"width": 350, "height": 200}
 
-# --- STUDENT PROFILE & PROGRESSION ---
+# --- Perfil do Aluno Estrutura Inicial ---
 INITIAL_DATA_STRUCTURE = {
     "nome": "",
     "usa_llm": True,
@@ -100,7 +100,7 @@ ADVANCEMENT_CRITERIA = {
     "max_difficulty": 2.0
 }
 
-# --- HELPER FUNCTIONS ---
+# --- Funções de Configuracao de Tema ---
 def setup_theme():
     """Configura o tema padrão da aplicação"""
     ctk.set_appearance_mode(APPEARANCE_MODE)

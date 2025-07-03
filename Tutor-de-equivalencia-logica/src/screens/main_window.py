@@ -10,8 +10,8 @@ from src.perfil.perfil import criar_perfil, carregar_perfil, salvar_perfil
 class MainWindow:
     def __init__(self, on_iniciar_callback):
         self.on_iniciar_callback = on_iniciar_callback
-        self.perfil = None  # Perfil carregado em memória
-        self.perfil_path = None  # Inicializar como None
+        self.perfil = None  
+        self.perfil_path = None  
         self.root = ctk.CTk()
         self.root.title("Tutor de Lógica")
         # Tela cheia por padrão
@@ -136,7 +136,7 @@ class MainWindow:
         )
         btn_sair.pack(pady=(20, 0))
 
-    # === MÉTODOS DOS GRÁFICOS (CORRIGIDOS) ===
+   
     
     def abrir_grafico_status_niveis(self):
         """Gráfico vertical de status dos níveis"""
@@ -175,7 +175,7 @@ class MainWindow:
                 return
                 
             from src.perfil.graficos import grafico_resumo_geral
-            grafico_resumo_geral(self.perfil_path)  # Passar perfil_path
+            grafico_resumo_geral(self.perfil_path) 
         except Exception as e:
             messagebox.showerror("Erro", f"Erro ao gerar gráfico: {e}")
 
@@ -210,7 +210,7 @@ class MainWindow:
         label = ctk.CTkLabel(frame, text="Escolha o nível para análise:", font=ctk.CTkFont(size=14, weight="bold"))
         label.pack(pady=(10, 15))
         
-        # Botões dos níveis - CORRIGIDO para passar perfil_path
+       
         for nivel in [1, 2, 3]:
             btn = ctk.CTkButton(
                 frame,
@@ -220,7 +220,7 @@ class MainWindow:
             )
             btn.pack(pady=5)
 
-    # === RESTO DOS MÉTODOS (INALTERADOS) ===
+   
     
     def fluxo_inicial(self):
         resposta = messagebox.askyesno("Perfil", "Você já possui um perfil salvo (arquivo JSON)?")

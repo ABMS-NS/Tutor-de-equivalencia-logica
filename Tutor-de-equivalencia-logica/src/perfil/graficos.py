@@ -2,9 +2,15 @@
 Gera gráficos de desempenho do aluno com análises pedagógicas.
 """
 import matplotlib.pyplot as plt
+from matplotlib.patches import FancyBboxPatch
+import matplotlib.lines as mlines
+from matplotlib.patches import Patch
 import numpy as np
 from collections import defaultdict
 from src.perfil.perfil import carregar_perfil
+import os
+import json
+from src.config import QUESTOES_PATH
 import customtkinter as ctk
 from tkinter import Text, Scrollbar, RIGHT, Y, END
 import tkinter as tk
@@ -232,9 +238,6 @@ def grafico_status_niveis(perfil_path):
     """
     Mostra um gráfico vertical de nós conectados representando o status de cada nível.
     """
-    from matplotlib.patches import FancyBboxPatch
-    import matplotlib.lines as mlines
-    from matplotlib.patches import Patch
     
     dados = carregar_perfil(perfil_path)
     niveis = sorted([int(k) for k in dados["niveis"].keys()])
@@ -348,7 +351,7 @@ Níveis disponíveis: {liberados}
 
 def extrair_conceitos_de_questao(questao_data):
     """
-    ✅ NOVA FUNÇÃO: Extrai conceitos reais das questões baseado nos dados disponíveis
+    Extrai conceitos de uma questão, buscando nos campos 'conceitos', 'conceito', 'topico' e 'topicos'.
     """
     conceitos = set()
     
@@ -403,11 +406,9 @@ def extrair_conceitos_de_questao(questao_data):
 
 def carregar_questoes_para_analise():
     """
-    ✅ NOVA FUNÇÃO: Carrega todas as questões dos arquivos JSON para análise completa
+    Carrega todas as questões de todos os níveis para análise de conceitos.
+    Retorna um dicionário indexado por ID.
     """
-    import os
-    import json
-    from src.config import QUESTOES_PATH
     
     todas_questoes = {}
     
@@ -438,11 +439,11 @@ def carregar_questoes_para_analise():
 
 def grafico_por_conceito(perfil_path):
     """
-    ✅ MELHORADA: Mostra um gráfico radar com desempenho por conceito/tópico REAL das questões
+    Mostra um gráfico radar com desempenho por conceito/tópico das questões.
     """
     dados = carregar_perfil(perfil_path)
     
-    # ✅ Carregar questões reais dos arquivos JSON
+    # carregar todas as questões para análise
     todas_questoes = carregar_questoes_para_analise()
     
     # Buscar conceitos REAIS em resumo_questoes
@@ -456,11 +457,11 @@ def grafico_por_conceito(perfil_path):
             for q in tentativa.get("resumo_questoes", []):
                 q_id = str(q.get("id", ""))
                 
-                # ✅ Buscar questão real no arquivo JSON
+                # Buscar questão real no arquivo JSON
                 questao_real = todas_questoes.get(q_id, {})
                 
                 if questao_real:
-                    # ✅ Extrair conceitos REAIS da questão
+                    #  Extrair conceitos REAIS da questão
                     conceitos_questao = extrair_conceitos_de_questao(questao_real)
                 else:
                     # Fallback se não encontrar a questão
@@ -505,7 +506,7 @@ def grafico_por_conceito(perfil_path):
         acertos.append(taxa_acerto)
         facilidades.append(facilidade)
 
-    # ✅ Gráfico radar melhorado
+    
     angles = np.linspace(0, 2 * np.pi, len(conceitos), endpoint=False).tolist()
     acertos += acertos[:1]
     facilidades += facilidades[:1]
@@ -517,14 +518,13 @@ def grafico_por_conceito(perfil_path):
     ax.plot(angles, facilidades, 's-', linewidth=3, color='blue', label='Facilidade', markersize=8)
     ax.fill(angles, facilidades, alpha=0.15, color='blue')
     
-    # ✅ Melhorar labels dos conceitos (quebrar linhas se necessário)
     conceitos_quebrados = [c.replace(' ', '\n') if len(c) > 12 else c for c in conceitos]
     ax.set_thetagrids(np.degrees(angles[:-1]), conceitos_quebrados, fontsize=10)
     ax.set_ylim(0, 1.1)
     ax.set_title("Desempenho por Conceito/Tópico", fontsize=16, fontweight='bold', pad=20)
     ax.legend(loc='upper right', bbox_to_anchor=(1.3, 1.1), fontsize=12)
     
-    # ✅ Grid radial
+   
     ax.grid(True, alpha=0.3)
     ax.set_rlabel_position(45)
     
@@ -536,7 +536,7 @@ def grafico_por_conceito(perfil_path):
 
 def mostrar_analise_conceitos(conceitos, acertos, conceitos_stats):
     """
-    ✅ MELHORADA: Mostra análise detalhada de conceitos em interface
+    Mostra análise detalhada por conceitos em uma janela customtkinter.
     """
     pontos_fracos = []
     pontos_fortes = []
@@ -575,7 +575,7 @@ def mostrar_analise_conceitos(conceitos, acertos, conceitos_stats):
     text_area.pack(side="left", fill="both", expand=True)
     scroll.pack(side=RIGHT, fill=Y)
     
-    # ✅ Análise mais detalhada
+    
     analise = "🧠 ANÁLISE DETALHADA POR CONCEITOS\n"
     analise += "=" * 50 + "\n\n"
     
@@ -592,7 +592,7 @@ def mostrar_analise_conceitos(conceitos, acertos, conceitos_stats):
     if pontos_fortes:
         analise += "✅ CONCEITOS BEM DOMINADOS:\n"
         pontos_fortes.sort(key=lambda x: x[1], reverse=True)
-        for i, (conceito, taxa, dif, total) in enumerate(pontos_fortes[:5]):  # Top 5
+        for i, (conceito, taxa, dif, total) in enumerate(pontos_fortes[:5]): 
             analise += f"{i+1}. {conceito}:\n"
             analise += f"   • Taxa de acerto: {taxa*100:.1f}%\n"
             analise += f"   • Dificuldade média: {dif:.2f}\n"
@@ -601,7 +601,7 @@ def mostrar_analise_conceitos(conceitos, acertos, conceitos_stats):
     # Pontos fracos
     if pontos_fracos:
         analise += "⚠️ CONCEITOS QUE PRECISAM DE ATENÇÃO:\n"
-        pontos_fracos.sort(key=lambda x: (x[1], -x[2]))  # Pior taxa primeiro, maior dificuldade depois
+        pontos_fracos.sort(key=lambda x: (x[1], -x[2]))  
         for i, (conceito, taxa, dif, total) in enumerate(pontos_fracos):
             prioridade = "🔴 CRÍTICO" if taxa < 0.4 or dif > 3.0 else "🟡 MODERADO"
             analise += f"{i+1}. {conceito} ({prioridade}):\n"
@@ -609,7 +609,7 @@ def mostrar_analise_conceitos(conceitos, acertos, conceitos_stats):
             analise += f"   • Dificuldade média: {dif:.2f}\n"
             analise += f"   • Questões resolvidas: {total}\n"
             
-            # ✅ Sugestões específicas por conceito
+           
             if "De Morgan" in conceito:
                 analise += f"   💡 Dica: Revise as leis de De Morgan (¬(A∧B) = ¬A∨¬B)\n"
             elif "Distributiv" in conceito:
@@ -622,7 +622,7 @@ def mostrar_analise_conceitos(conceitos, acertos, conceitos_stats):
                 analise += f"   💡 Dica: Revise teoria e pratique exercícios similares\n"
             analise += "\n"
         
-        # ✅ Plano de estudos
+        
         analise += "📚 PLANO DE ESTUDOS RECOMENDADO:\n"
         if len(pontos_fracos) <= 2:
             analise += "• Dedique 45-60 minutos por conceito\n"
@@ -644,7 +644,7 @@ def mostrar_analise_conceitos(conceitos, acertos, conceitos_stats):
         analise += "• Avance para níveis mais desafiadores\n"
         analise += "• Pratique exercícios de tempo limitado\n\n"
     
-    # ✅ Resumo final
+   
     analise += "=" * 50 + "\n"
     analise += f"📊 RESUMO FINAL: {media_geral*100:.1f}% de domínio geral\n"
     if media_geral >= 0.85:
