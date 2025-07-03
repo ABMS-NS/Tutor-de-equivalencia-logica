@@ -1,0 +1,10 @@
+customtkinter
+darkdetect
+requests
+sympy
+google-generativeai
+lark
+openai
+python-dotenv
+matplotlib
+numpy
