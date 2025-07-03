@@ -155,7 +155,7 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 
 ## Autores
 
-- **Jean Felipe Duarte Tenório** - 
-- **Alison Bruno Martires Soares** -
+- **Alison Bruno Martires Soares** - 
+- **Jean Felipe Duarte Tenório** -
 - **Rian Américo Brito da Silva** - 
 - **Davi Silva de Melo Lins** - 
